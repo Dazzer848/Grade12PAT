@@ -83,19 +83,13 @@
                               <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                               <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="noneFilterButton" max="32767" attributes="0"/>
-                                      <Component id="lowQuantityFilterButton" pref="111" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="lowQuantityFilterButton" min="-2" pref="111" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="toReplenishFilterButton" pref="118" max="32767" attributes="0"/>
-                                      <Component id="highQuantityFilterButton" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="highQuantityFilterButton" min="-2" pref="118" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="sortAplhaASCOrderByButton" pref="115" max="32767" attributes="0"/>
+                                      <Component id="sortAlphaASCOrderByButton" pref="115" max="32767" attributes="0"/>
                                       <Component id="sortAlphaDESCOrderButton" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
@@ -147,6 +141,11 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <Component id="toReplenishFilterButton" min="-2" pref="118" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -174,10 +173,7 @@
                       <Component id="highQuantityFilterButton" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="noneFilterButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="toReplenishFilterButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="toReplenishFilterButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -185,7 +181,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="priceASCOrderButton" min="-2" max="-2" attributes="0"/>
-                      <Component id="sortAplhaASCOrderByButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="sortAlphaASCOrderByButton" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -234,16 +230,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="FUSELAGE"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fuselageTagButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="wingsTagButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="WINGS"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="wingsTagButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="paintsTagButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="PAINTS"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paintsTagButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
         </Component>
@@ -259,21 +264,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="LOW QTY"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lowQuantityFilterButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="highQuantityFilterButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="HIGH QTY"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JToggleButton" name="noneFilterButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="NONE"/>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="highQuantityFilterButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="toReplenishFilterButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="TO REPLENISH"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toReplenishFilterButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator2">
         </Component>
@@ -285,25 +294,37 @@
             <Property name="text" type="java.lang.String" value="ORDER BY"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JToggleButton" name="sortAplhaASCOrderByButton">
+        <Component class="javax.swing.JToggleButton" name="sortAlphaASCOrderByButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="NAME ( A- Z )"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortAlphaASCOrderByButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="priceASCOrderButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="PRICE ASC"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceASCOrderButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="sortAlphaDESCOrderButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="NAME ( Z- A )"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortAlphaDESCOrderButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JToggleButton" name="priceDESCOrderButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="PRICE DESC"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceDESCOrderButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator3">
         </Component>
@@ -360,15 +381,46 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="634" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="647" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="inventoryTable">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
     </Container>
   </SubComponents>
 </Form>

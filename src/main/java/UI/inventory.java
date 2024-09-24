@@ -4,17 +4,39 @@
  */
 package UI;
 
+import DBMS.DB;
+import java.util.List;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import DBMS.DB;
+import java.awt.Color;
+import java.sql.*;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author dazzl
  */
 public class inventory extends javax.swing.JFrame {
 
+    private String currentCategoryFilter = "";
+    private String currentQuantityFilter = "";
+    private String currentSortOrder = "";
+    
+
     /**
-     * Creates new form inventory
+     *
      */
     public inventory() {
         initComponents();
+        populateTable("", "","");
+
     }
 
     /**
@@ -36,11 +58,10 @@ public class inventory extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lowQuantityFilterButton = new javax.swing.JToggleButton();
         highQuantityFilterButton = new javax.swing.JToggleButton();
-        noneFilterButton = new javax.swing.JToggleButton();
         toReplenishFilterButton = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JSeparator();
         orderByLabel = new javax.swing.JLabel();
-        sortAplhaASCOrderByButton = new javax.swing.JToggleButton();
+        sortAlphaASCOrderByButton = new javax.swing.JToggleButton();
         priceASCOrderButton = new javax.swing.JToggleButton();
         sortAlphaDESCOrderButton = new javax.swing.JToggleButton();
         priceDESCOrderButton = new javax.swing.JToggleButton();
@@ -53,6 +74,8 @@ public class inventory extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         inventoryMainHeader = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        inventoryTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,32 +92,80 @@ public class inventory extends javax.swing.JFrame {
         });
 
         fuselageTagButton.setText("FUSELAGE");
+        fuselageTagButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fuselageTagButtonActionPerformed(evt);
+            }
+        });
 
         wingsTagButton.setText("WINGS");
+        wingsTagButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wingsTagButtonActionPerformed(evt);
+            }
+        });
 
         paintsTagButton.setText("PAINTS");
+        paintsTagButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paintsTagButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         jLabel2.setText("FILTER");
 
         lowQuantityFilterButton.setText("LOW QTY");
+        lowQuantityFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lowQuantityFilterButtonActionPerformed(evt);
+            }
+        });
 
         highQuantityFilterButton.setText("HIGH QTY");
-
-        noneFilterButton.setText("NONE");
+        highQuantityFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                highQuantityFilterButtonActionPerformed(evt);
+            }
+        });
 
         toReplenishFilterButton.setText("TO REPLENISH");
+        toReplenishFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toReplenishFilterButtonActionPerformed(evt);
+            }
+        });
 
         orderByLabel.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         orderByLabel.setText("ORDER BY");
 
-        sortAplhaASCOrderByButton.setText("NAME ( A- Z )");
+        sortAlphaASCOrderByButton.setText("NAME ( A- Z )");
+        sortAlphaASCOrderByButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortAlphaASCOrderByButtonActionPerformed(evt);
+            }
+        });
 
         priceASCOrderButton.setText("PRICE ASC");
+        priceASCOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceASCOrderButtonActionPerformed(evt);
+            }
+        });
 
         sortAlphaDESCOrderButton.setText("NAME ( Z- A )");
+        sortAlphaDESCOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortAlphaDESCOrderButtonActionPerformed(evt);
+            }
+        });
 
         priceDESCOrderButton.setText("PRICE DESC");
+        priceDESCOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceDESCOrderButtonActionPerformed(evt);
+            }
+        });
 
         advancedSearchLabel.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         advancedSearchLabel.setText("ADVANCED SEARCH");
@@ -126,16 +197,12 @@ public class inventory extends javax.swing.JFrame {
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)
                             .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
-                                .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(noneFilterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lowQuantityFilterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                                .addComponent(lowQuantityFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(toReplenishFilterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                                    .addComponent(highQuantityFilterButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(highQuantityFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sortAplhaASCOrderByButton, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                    .addComponent(sortAlphaASCOrderByButton, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                                     .addComponent(sortAlphaDESCOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -170,6 +237,10 @@ public class inventory extends javax.swing.JFrame {
                                 .addComponent(partTagsLabel)))
                         .addGap(0, 57, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryFiltersPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(toReplenishFilterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77))
         );
         inventoryFiltersPanelLayout.setVerticalGroup(
             inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,9 +264,7 @@ public class inventory extends javax.swing.JFrame {
                     .addComponent(lowQuantityFilterButton)
                     .addComponent(highQuantityFilterButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(noneFilterButton)
-                    .addComponent(toReplenishFilterButton))
+                .addComponent(toReplenishFilterButton)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -203,7 +272,7 @@ public class inventory extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(priceASCOrderButton)
-                    .addComponent(sortAplhaASCOrderByButton))
+                    .addComponent(sortAlphaASCOrderByButton))
                 .addGap(18, 18, 18)
                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(sortAlphaDESCOrderButton)
@@ -230,15 +299,34 @@ public class inventory extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
+        inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(inventoryTable);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 634, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,8 +364,287 @@ public class inventory extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void engineTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_engineTagButtonActionPerformed
-        // TODO add your handling code here:
+ if (engineTagButton.isSelected()) {
+        // Deselect other category buttons
+        fuselageTagButton.setSelected(false);
+        wingsTagButton.setSelected(false);
+        paintsTagButton.setSelected(false);
+        currentCategoryFilter = "ENGINE";
+
+        // Change background color to green
+        engineTagButton.setBackground(Color.GREEN);
+    } else {
+        currentCategoryFilter = "";
+
+        // Reset background color to default
+        engineTagButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    fuselageTagButton.setBackground(Color.white);
+    wingsTagButton.setBackground(Color.white);
+    paintsTagButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+
     }//GEN-LAST:event_engineTagButtonActionPerformed
+
+    private void fuselageTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuselageTagButtonActionPerformed
+    if (fuselageTagButton.isSelected()) {
+        // Deselect other category buttons
+        engineTagButton.setSelected(false);
+        wingsTagButton.setSelected(false);
+        paintsTagButton.setSelected(false);
+        currentCategoryFilter = "FUSELAGE";
+
+        // Change background color to green
+        fuselageTagButton.setBackground(Color.GREEN);
+    } else {
+        currentCategoryFilter = "";
+
+        // Reset background color to default
+        fuselageTagButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    engineTagButton.setBackground(Color.white);
+    wingsTagButton.setBackground(Color.white);
+    paintsTagButton.setBackground(Color.white);
+
+    
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_fuselageTagButtonActionPerformed
+
+    private void wingsTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wingsTagButtonActionPerformed
+    if (wingsTagButton.isSelected()) {
+        // Deselect other category buttons
+        engineTagButton.setSelected(false);
+        fuselageTagButton.setSelected(false);
+        paintsTagButton.setSelected(false);
+        currentCategoryFilter = "WINGS";
+
+        // Change background color to green
+        wingsTagButton.setBackground(Color.GREEN);
+    } else {
+        currentCategoryFilter = "";
+
+        // Reset background color to default
+        wingsTagButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    engineTagButton.setBackground(Color.white);
+    fuselageTagButton.setBackground(Color.white);
+    paintsTagButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_wingsTagButtonActionPerformed
+
+    private void paintsTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paintsTagButtonActionPerformed
+    if (paintsTagButton.isSelected()) {
+        // Deselect other category buttons
+        engineTagButton.setSelected(false);
+        fuselageTagButton.setSelected(false);
+        wingsTagButton.setSelected(false);
+        currentCategoryFilter = "PAINTS";
+
+        // Change background color to green
+        paintsTagButton.setBackground(Color.GREEN);
+    } else {
+        currentCategoryFilter = "";
+
+        // Reset background color to default
+        paintsTagButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    engineTagButton.setBackground(Color.white);
+    fuselageTagButton.setBackground(Color.white);
+    wingsTagButton.setBackground(Color.white);
+
+    
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_paintsTagButtonActionPerformed
+
+    private void highQuantityFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_highQuantityFilterButtonActionPerformed
+    if (highQuantityFilterButton.isSelected()) {
+        // Deselect other quantity filter buttons
+        lowQuantityFilterButton.setSelected(false);
+        toReplenishFilterButton.setSelected(false);
+        currentQuantityFilter = "HIGH";
+
+        // Change background color to green
+        highQuantityFilterButton.setBackground(Color.GREEN);
+    } else {
+        currentQuantityFilter = "";
+
+        // Reset background color to default
+        highQuantityFilterButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    lowQuantityFilterButton.setBackground(Color.white);
+    toReplenishFilterButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_highQuantityFilterButtonActionPerformed
+
+    private void lowQuantityFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowQuantityFilterButtonActionPerformed
+    if (lowQuantityFilterButton.isSelected()) {
+        // Deselect other quantity filter buttons
+        highQuantityFilterButton.setSelected(false);
+        toReplenishFilterButton.setSelected(false);
+        currentQuantityFilter = "LOW";
+
+        // Change background color to green
+        lowQuantityFilterButton.setBackground(Color.GREEN);
+    } else {
+        currentQuantityFilter = "";
+
+        // Reset background color to default
+        lowQuantityFilterButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    highQuantityFilterButton.setBackground(Color.white);
+    toReplenishFilterButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_lowQuantityFilterButtonActionPerformed
+
+    private void toReplenishFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toReplenishFilterButtonActionPerformed
+    if (toReplenishFilterButton.isSelected()) {
+        // Deselect other quantity filter buttons
+        lowQuantityFilterButton.setSelected(false);
+        highQuantityFilterButton.setSelected(false);
+        currentQuantityFilter = "TO_REPLENISH";
+
+        // Change background color to green
+        toReplenishFilterButton.setBackground(Color.GREEN);
+    } else {
+        currentQuantityFilter = "";
+
+        // Reset background color to default
+        toReplenishFilterButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    lowQuantityFilterButton.setBackground(Color.white);
+    highQuantityFilterButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_toReplenishFilterButtonActionPerformed
+
+    private void priceASCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceASCOrderButtonActionPerformed
+          if (priceASCOrderButton.isSelected()) {
+        // Deselect other sorting buttons
+        priceDESCOrderButton.setSelected(false);
+        sortAlphaASCOrderByButton.setSelected(false);
+        sortAlphaDESCOrderButton.setSelected(false);
+        currentSortOrder = "PRICE_ASC";
+
+        // Change background color to green
+        priceASCOrderButton.setBackground(Color.GREEN);
+    } else {
+        currentSortOrder = "";
+
+        // Reset background color to default
+        priceASCOrderButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    priceDESCOrderButton.setBackground(Color.white);
+    sortAlphaASCOrderByButton.setBackground(Color.white);
+    sortAlphaDESCOrderButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_priceASCOrderButtonActionPerformed
+
+    private void priceDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceDESCOrderButtonActionPerformed
+            if (priceDESCOrderButton.isSelected()) {
+        // Deselect other sorting buttons
+        priceASCOrderButton.setSelected(false);
+        sortAlphaASCOrderByButton.setSelected(false);
+        sortAlphaDESCOrderButton.setSelected(false);
+        currentSortOrder = "PRICE_DESC";
+
+        // Change background color to green
+        priceDESCOrderButton.setBackground(Color.GREEN);
+    } else {
+        currentSortOrder = "";
+
+        // Reset background color to default
+        priceDESCOrderButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    priceASCOrderButton.setBackground(Color.white);
+    sortAlphaASCOrderByButton.setBackground(Color.white);
+    sortAlphaDESCOrderButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_priceDESCOrderButtonActionPerformed
+
+    private void sortAlphaASCOrderByButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaASCOrderByButtonActionPerformed
+            if (sortAlphaASCOrderByButton.isSelected()) {
+        // Deselect other sorting buttons
+        priceASCOrderButton.setSelected(false);
+        priceDESCOrderButton.setSelected(false);
+        sortAlphaDESCOrderButton.setSelected(false);
+        currentSortOrder = "NAME_ASC";
+
+        // Change background color to green
+        sortAlphaASCOrderByButton.setBackground(Color.GREEN);
+    } else {
+        currentSortOrder = "";
+
+        // Reset background color to default
+        sortAlphaASCOrderByButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    priceASCOrderButton.setBackground(Color.white);
+    priceDESCOrderButton.setBackground(Color.white);
+    sortAlphaDESCOrderButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_sortAlphaASCOrderByButtonActionPerformed
+
+    private void sortAlphaDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaDESCOrderButtonActionPerformed
+            if (sortAlphaDESCOrderButton.isSelected()) {
+        // Deselect other sorting buttons
+        priceASCOrderButton.setSelected(false);
+        priceDESCOrderButton.setSelected(false);
+        sortAlphaASCOrderByButton.setSelected(false);
+        currentSortOrder = "NAME_DESC";
+
+        // Change background color to green
+        sortAlphaDESCOrderButton.setBackground(Color.GREEN);
+    } else {
+        currentSortOrder = "";
+
+        // Reset background color to default
+        sortAlphaDESCOrderButton.setBackground(Color.white);
+    }
+
+    // Reset background colors of other buttons
+    priceASCOrderButton.setBackground(Color.white);
+    priceDESCOrderButton.setBackground(Color.white);
+    sortAlphaASCOrderByButton.setBackground(Color.white);
+
+    //Re-populates table
+    populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_sortAlphaDESCOrderButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -313,6 +680,112 @@ public class inventory extends javax.swing.JFrame {
             }
         });
     }
+private void populateTable(String categoryFilter, String quantityFilter, String sortOrder) {
+    DefaultTableModel tableModel = new DefaultTableModel();
+
+    try {
+        
+        // Connects to the Database
+        DB.connect();
+
+        //String query.
+        String query = "SELECT parts.part_id, parts.part_name, parts.price, parts.category, "
+                     + "COALESCE(inventory.quantity, 0) AS quantity "
+                     + "FROM parts "
+                     + "LEFT JOIN inventory ON parts.part_id = inventory.part_id";
+
+        // Build the WHERE clause based on filters
+        List<String> conditions = new ArrayList<>();
+
+        if (categoryFilter != null && !categoryFilter.isEmpty()) {
+            conditions.add("parts.category = '" + categoryFilter + "'");
+        }
+
+        if (quantityFilter != null && !quantityFilter.isEmpty()) {
+            switch (quantityFilter) {
+                case "LOW":
+                    conditions.add("quantity > 0 AND quantity <= 10");
+                    break;
+                case "HIGH":
+                    conditions.add("quantity > 10");
+                    break;
+                case "TO_REPLENISH":
+                    conditions.add("quantity = 0");
+                    break;
+
+            }
+        }
+
+        if (!conditions.isEmpty()) {
+            query += " WHERE " + String.join(" AND ", conditions);
+        }
+
+        // Add ORDER BY clause based on sortOrder
+        if (sortOrder != null && !sortOrder.isEmpty()) {
+            switch (sortOrder) {
+                case "PRICE_ASC":
+                    query += " ORDER BY parts.price ASC";
+                    break;
+                case "PRICE_DESC":
+                    query += " ORDER BY parts.price DESC";
+                    break;
+                case "NAME_ASC":
+                    query += " ORDER BY parts.part_name ASC";
+                    break;
+                case "NAME_DESC":
+                    query += " ORDER BY parts.part_name DESC";
+                    break;
+            }
+        }
+
+        // Execute the query using DB.query()
+        ResultSet resultSet = DB.query(query);
+
+        // Get metadata to add column names
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // Add column names to the table model
+        for (int i = 1; i <= columnCount; i++) {
+            tableModel.addColumn(metaData.getColumnName(i));
+        }
+
+        // Add rows to the table model
+        while (resultSet.next()) {
+            Object[] rowData = new Object[columnCount];
+            for (int i = 1; i <= columnCount; i++) {
+                rowData[i - 1] = resultSet.getObject(i);
+            }
+            tableModel.addRow(rowData);
+        }
+
+        // Set the model to your JTable
+        inventoryTable.setModel(tableModel);
+
+        // Close the resultSet
+        resultSet.close();
+
+    } catch (ClassNotFoundException | SQLException pleaseDontGiveMeErrors) {
+        pleaseDontGiveMeErrors.printStackTrace();
+    }
+}
+
+    //Method which returns the Current category that is being filtered by.
+    private String getCurrentCategoryFilter() {
+        if (engineTagButton.isSelected()) {
+            return "ENGINE";
+        } else if (fuselageTagButton.isSelected()) {
+            return "FUSELAGE";
+        } else if (wingsTagButton.isSelected()) {
+            return "WINGS";
+        } else if (paintsTagButton.isSelected()) {
+            return "PAINTS";
+        } else {
+            return "";
+        }
+    }
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel advancedSearchLabel;
@@ -321,14 +794,15 @@ public class inventory extends javax.swing.JFrame {
     private javax.swing.JToggleButton highQuantityFilterButton;
     private javax.swing.JPanel inventoryFiltersPanel;
     private javax.swing.JLabel inventoryMainHeader;
+    private javax.swing.JTable inventoryTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToggleButton lowQuantityFilterButton;
-    private javax.swing.JToggleButton noneFilterButton;
     private javax.swing.JLabel orderByLabel;
     private javax.swing.JToggleButton paintsTagButton;
     private javax.swing.JTextField partIDEntryTextField;
@@ -338,8 +812,8 @@ public class inventory extends javax.swing.JFrame {
     private javax.swing.JLabel partTagsLabel;
     private javax.swing.JToggleButton priceASCOrderButton;
     private javax.swing.JToggleButton priceDESCOrderButton;
+    private javax.swing.JToggleButton sortAlphaASCOrderByButton;
     private javax.swing.JToggleButton sortAlphaDESCOrderButton;
-    private javax.swing.JToggleButton sortAplhaASCOrderByButton;
     private javax.swing.JToggleButton toReplenishFilterButton;
     private javax.swing.JToggleButton wingsTagButton;
     // End of variables declaration//GEN-END:variables
