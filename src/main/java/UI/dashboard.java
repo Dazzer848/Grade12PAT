@@ -26,15 +26,15 @@ public class dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        inventoryBuutton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("INVENTORY");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        inventoryBuutton.setText("INVENTORY");
+        inventoryBuutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                inventoryBuuttonActionPerformed(evt);
             }
         });
 
@@ -48,14 +48,14 @@ public class dashboard extends javax.swing.JFrame {
                 .addGap(348, 348, 348)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(inventoryBuutton))
                 .addContainerGap(399, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(inventoryBuutton)
                 .addGap(214, 214, 214)
                 .addComponent(jButton2)
                 .addContainerGap(229, Short.MAX_VALUE))
@@ -64,11 +64,11 @@ public class dashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        inventory.setVisible(true);
+    private void inventoryBuuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBuuttonActionPerformed
+        new inventory().setVisible(true);
         dispose();
        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_inventoryBuuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,7 +106,7 @@ public class dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton inventoryBuutton;
     private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
