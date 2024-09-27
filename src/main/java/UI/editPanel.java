@@ -4,17 +4,34 @@
  */
 package UI;
 
+import Backend.Part;
+import Backend.inventoryManager;
+import DBMS.DB;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dazzl
  */
 public class editPanel extends javax.swing.JFrame {
-
+    private Part part;
+    private inventoryManager manager;
     /**
      * Creates new form editPanel
      */
-    public editPanel() {
-        initComponents();
+    public editPanel(Part selectedPart) {
+    initComponents();
+    this.part = selectedPart;
+    this.manager = new inventoryManager();
+    populateFields();
+    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    catagorySelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ENGINE", "FUSELAGE", "WINGS", "PAINTS" }));
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -45,6 +62,11 @@ public class editPanel extends javax.swing.JFrame {
         enterItemIDTextField.setToolTipText("");
 
         enterPartNameTextField.setText("Enter your name...");
+        enterPartNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterPartNameTextFieldActionPerformed(evt);
+            }
+        });
 
         quantitiyLable.setText("Quantitiy:");
 
@@ -53,6 +75,11 @@ public class editPanel extends javax.swing.JFrame {
         priceLabel.setText("Price");
 
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,7 +111,7 @@ public class editPanel extends javax.swing.JFrame {
                         .addGap(120, 120, 120)
                         .addComponent(editItemHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
+                        .addGap(117, 117, 117)
                         .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(84, Short.MAX_VALUE))
         );
@@ -107,48 +134,71 @@ public class editPanel extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(itemQuantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(itemPriceSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGap(38, 38, 38)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void enterPartNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPartNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enterPartNameTextFieldActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+    //Validate and approve the data
+    String partName = enterPartNameTextField.getText().trim();
+    String category = catagorySelectionComboBox.getSelectedItem().toString();
+    int price = (int) itemPriceSpinner.getValue();
+    int quantity = (int) itemQuantitySpinner.getValue();
+
+    //Validation
+    if (partName.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Part name cannot be empty.");
+        return;
+    }
+
+    // Update the part object
+    part.setName(partName);
+    part.setCatogory(category);
+    part.setPrice(price);
+    part.setQuantity(quantity);
+
+    // Update the database
+    boolean success = manager.updatePartDetails(part);
+
+    if (success) {
+        JOptionPane.showMessageDialog(this, "Part updated successfully.");
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Failed to update part.");
+    }
+    }//GEN-LAST:event_confirmButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(editPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(editPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(editPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(editPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new editPanel().setVisible(true);
-            }
-        });
-    }
+ private void populateFields() {
+    enterItemIDTextField.setText(String.valueOf(part.getPartID()));
+    enterItemIDTextField.setEditable(false); // Make it read-only if desired
+
+    enterPartNameTextField.setText(part.getName());
+
+    // Set category in JComboBox
+    catagorySelectionComboBox.setSelectedItem(part.getCatogory());
+
+    // Set price in JSpinner
+    itemPriceSpinner.setValue(part.getPrice());
+
+    // Set quantity in JSpinner
+    itemQuantitySpinner.setValue(part.getQuantity());
+}
+
+
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> catagorySelectionComboBox;

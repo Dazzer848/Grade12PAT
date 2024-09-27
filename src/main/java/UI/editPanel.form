@@ -59,7 +59,7 @@
                       <Component id="editItemHeader" min="-2" pref="218" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
                       <Component id="confirmButton" min="-2" pref="198" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -88,9 +88,9 @@
                   <Component id="itemQuantitySpinner" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="itemPriceSpinner" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="confirmButton" min="-2" pref="63" max="-2" attributes="0"/>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <EmptySpace pref="42" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -114,6 +114,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Enter your name..."/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enterPartNameTextFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="quantitiyLable">
       <Properties>
@@ -148,6 +151,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirm"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
