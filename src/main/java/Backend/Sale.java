@@ -4,48 +4,48 @@
  */
 package Backend;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author darre
  */
 public class Sale {
-    private int SaleID;
-    private int clientID;
-    private int Total;
-    private itemSold[] itemsBought;
+    ArrayList<Part> sales = new ArrayList<Part>();
+    private int total;
+    ArrayList<Integer> quantities =  new ArrayList<Integer>();
 
-    public Sale(int SaleID, int clientID, int Total, itemSold[] inItemsBought) {
-        this.SaleID = SaleID;
-        this.clientID = clientID;
-        this.Total = Total;
-        this.itemsBought = inItemsBought;
+    public Sale(ArrayList<Part> inParts, int inTotal, ArrayList<Integer> inQuantities) {
+        this.sales = inParts;
+        this.total = inTotal;
+        this.quantities = inQuantities;
     }
 
-    public void setSaleID(int SaleID) {
-        this.SaleID = SaleID;
-    }
-
-    public int getSaleID() {
-        return SaleID;
-    }
-    
-
-    public int getClientID() {
-        return clientID;
+    public ArrayList<Part> getSales() {
+        return sales;
     }
 
     public int getTotal() {
-        return Total;
+        return total;
     }
 
-
-    public void setClientID(int clientID) {
-        this.clientID = clientID;
-    }
-
-    public void setTotal(int Total) {
-        this.Total = Total;
+    public ArrayList<Integer> getQuantities() {
+        return quantities;
     }
     
+    public String toString(){
+        String output = "============== ITEMS BOUGHT ==================\n";
+        for(int i = 0; i < sales.size(); i++){
+            int logicalItemNumber = i + 1;
+            output += "================== ITEM " + logicalItemNumber + " =====================";
+            Part p = sales.get(i);
+            output += p.toStringForSale() + "\n";
+            output += "QUANTITY: " + quantities.get(i) + "\n\n";
+            
+        }
+        output += "TOTAL: " + total;
+        return output;
+        
+    }
     
 }

@@ -120,6 +120,13 @@ public class Part {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    
+    public String toStringForSale() {
+        return "\nPART ID: " + partID + "\nPART NAME: " + name + "\nPRICE: " + price;
+    }
+   
+    
     
 
         

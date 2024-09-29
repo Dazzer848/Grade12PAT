@@ -10,8 +10,8 @@ package Backend;
  */
 public class salesTest {
     public static void main(String[] args) {
-        salesManager manager = new salesManager();
-        System.out.println("TEST");
+        saleManager manager = new saleManager();
+        System.out.println(manager.toString(1));
     }
     
 }
