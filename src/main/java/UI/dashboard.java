@@ -15,6 +15,7 @@ public class dashboard extends javax.swing.JFrame {
      * Creates new form dashboard
      */
     //Construction?
+    //THERE IS FUNNY STUFF HERE IN THIS CODE!
     public dashboard() {
         initComponents();
     }
