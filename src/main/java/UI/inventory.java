@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author dazzl
+ * MUST FIX THE TABLE NOT UPDATING AFTER EDITING THE PART
  */
 public class inventory extends javax.swing.JFrame {
 
@@ -715,7 +716,7 @@ public class inventory extends javax.swing.JFrame {
         // Get the part_id from the selected row
         int partId = (int) inventoryTable.getValueAt(selectedRow, 0);
 
-        manager.updatePart(partId, 1);
+        manager.updatePartQty(partId, 1);
 
         // Refresh the table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
@@ -736,7 +737,7 @@ public class inventory extends javax.swing.JFrame {
         // Get the part_id from the selected row
         int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
 
-        boolean success = manager.updatePart(partId, -1);
+        boolean success = manager.updatePartQty(partId, -1);
 
         if (success) {
             // Refresh the table

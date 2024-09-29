@@ -27,15 +27,20 @@
               <Component id="jPanel2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="inventoryMainHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="521" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="yourCartHeader" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="531" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,10 +50,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="inventoryMainHeader" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" pref="480" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Component id="yourCartHeader" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,12 +84,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="726" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="AddButton" max="32767" attributes="0"/>
-                      <Component id="removeOneButton" pref="252" max="32767" attributes="0"/>
-                      <Component id="editButton" alignment="0" max="32767" attributes="0"/>
-                      <Component id="deleteButton" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="addPartButton" pref="273" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -90,26 +92,18 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
-                  <Component id="AddButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                  <Component id="removeOneButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                  <Component id="editButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                  <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="inventoryFiltersPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jScrollPane1" alignment="0" min="-2" pref="444" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                              <Component id="addPartButton" min="-2" pref="75" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="jScrollPane1" pref="647" max="32767" attributes="0"/>
+                      <Component id="inventoryFiltersPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -136,36 +130,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="AddButton">
+        <Component class="javax.swing.JButton" name="addPartButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="ADD"/>
+            <Property name="text" type="java.lang.String" value="ADD PART"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="removeOneButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Remove 1"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeOneButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="editButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Edit Part"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="deleteButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Delete"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addPartButtonActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="inventoryFiltersPanel">
@@ -183,11 +153,6 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="partIDLabel" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="partIDEntryTextField" max="32767" attributes="0"/>
-                                  </Group>
                                   <Component id="jSeparator3" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
@@ -207,7 +172,6 @@
                                           <Component id="priceDESCOrderButton" pref="117" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="jButton1" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="engineTagButton" pref="107" max="32767" attributes="0"/>
@@ -219,19 +183,10 @@
                                           <Component id="fuselageTagButton" pref="116" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="partNameLabel" min="-2" pref="82" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="partNameEntryField" max="32767" attributes="0"/>
-                                  </Group>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Component id="advancedSearchLabel" min="-2" max="-2" attributes="0"/>
-                                  </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
                                       <Component id="orderByLabel" min="-2" max="-2" attributes="0"/>
@@ -245,7 +200,7 @@
                                       <Component id="partTagsLabel" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="57" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="94" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -299,21 +254,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="advancedSearchLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="partIDLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="partIDEntryTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="partNameEntryField" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="partNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="42" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="55" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace pref="265" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -437,39 +378,6 @@
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator3">
             </Component>
-            <Component class="javax.swing.JLabel" name="advancedSearchLabel">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri Light" size="18" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="ADVANCED SEARCH"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="partIDLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="ID:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="partIDEntryTextField">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField1"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="partNameLabel">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="NAME:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="partNameEntryField">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jTextField2"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="SEARCH"/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
       </SubComponents>
@@ -484,15 +392,92 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="1002" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="checkoutButton" pref="266" max="32767" attributes="0"/>
+                      <Component id="removePartButton" alignment="1" pref="266" max="32767" attributes="0"/>
+                      <Component id="clearOrderButton" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="316" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="removePartButton" min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                  <Component id="clearOrderButton" min="-2" pref="84" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="checkoutButton" min="-2" pref="64" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
+      <SubComponents>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="cartTable">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="4" rowCount="4">
+                    <Column editable="true" title="Title 1" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 2" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
+                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  </Table>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="checkoutButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Checkout"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="checkoutButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="removePartButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="REMOVE PART"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removePartButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="clearOrderButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CLEAR ORDER"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearOrderButtonActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
     </Container>
+    <Component class="javax.swing.JLabel" name="yourCartHeader">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Candara Light" size="36" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="YOUR CART"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>

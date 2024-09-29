@@ -57,10 +57,7 @@ public class saleCreation extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
-        AddButton = new javax.swing.JButton();
-        removeOneButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
+        addPartButton = new javax.swing.JButton();
         inventoryFiltersPanel = new javax.swing.JPanel();
         partTagsLabel = new javax.swing.JLabel();
         engineTagButton = new javax.swing.JToggleButton();
@@ -79,13 +76,13 @@ public class saleCreation extends javax.swing.JFrame {
         sortAlphaDESCOrderButton = new javax.swing.JToggleButton();
         priceDESCOrderButton = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JSeparator();
-        advancedSearchLabel = new javax.swing.JLabel();
-        partIDLabel = new javax.swing.JLabel();
-        partIDEntryTextField = new javax.swing.JTextField();
-        partNameLabel = new javax.swing.JLabel();
-        partNameEntryField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        cartTable = new javax.swing.JTable();
+        checkoutButton = new javax.swing.JButton();
+        removePartButton = new javax.swing.JButton();
+        clearOrderButton = new javax.swing.JButton();
+        yourCartHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,31 +104,10 @@ public class saleCreation extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(inventoryTable);
 
-        AddButton.setText("ADD");
-        AddButton.addActionListener(new java.awt.event.ActionListener() {
+        addPartButton.setText("ADD PART");
+        addPartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddButtonActionPerformed(evt);
-            }
-        });
-
-        removeOneButton.setText("Remove 1");
-        removeOneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeOneButtonActionPerformed(evt);
-            }
-        });
-
-        editButton.setText("Edit Part");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
-
-        deleteButton.setText("Delete");
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
+                addPartButtonActionPerformed(evt);
             }
         });
 
@@ -223,19 +199,6 @@ public class saleCreation extends javax.swing.JFrame {
             }
         });
 
-        advancedSearchLabel.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
-        advancedSearchLabel.setText("ADVANCED SEARCH");
-
-        partIDLabel.setText("ID:");
-
-        partIDEntryTextField.setText("jTextField1");
-
-        partNameLabel.setText("NAME:");
-
-        partNameEntryField.setText("jTextField2");
-
-        jButton1.setText("SEARCH");
-
         javax.swing.GroupLayout inventoryFiltersPanelLayout = new javax.swing.GroupLayout(inventoryFiltersPanel);
         inventoryFiltersPanel.setLayout(inventoryFiltersPanelLayout);
         inventoryFiltersPanelLayout.setHorizontalGroup(
@@ -245,10 +208,6 @@ public class saleCreation extends javax.swing.JFrame {
                     .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryFiltersPanelLayout.createSequentialGroup()
-                                .addComponent(partIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(partIDEntryTextField))
                             .addComponent(jSeparator3)
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)
@@ -264,7 +223,6 @@ public class saleCreation extends javax.swing.JFrame {
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(priceASCOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(priceDESCOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryFiltersPanelLayout.createSequentialGroup()
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(engineTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
@@ -272,16 +230,9 @@ public class saleCreation extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(paintsTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fuselageTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
-                            .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
-                                .addComponent(partNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(partNameEntryField))))
+                                    .addComponent(fuselageTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))))
                     .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                         .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(advancedSearchLabel))
                             .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                                 .addGap(94, 94, 94)
                                 .addComponent(orderByLabel))
@@ -291,7 +242,7 @@ public class saleCreation extends javax.swing.JFrame {
                             .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                                 .addGap(90, 90, 90)
                                 .addComponent(partTagsLabel)))
-                        .addGap(0, 57, Short.MAX_VALUE)))
+                        .addGap(0, 94, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryFiltersPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -335,19 +286,7 @@ public class saleCreation extends javax.swing.JFrame {
                     .addComponent(priceDESCOrderButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(advancedSearchLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(partIDLabel)
-                    .addComponent(partIDEntryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(partNameEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(partNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -359,47 +298,90 @@ public class saleCreation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AddButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(removeOneButton, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(addPartButton, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(AddButton)
-                .addGap(107, 107, 107)
-                .addComponent(removeOneButton)
-                .addGap(113, 113, 113)
-                .addComponent(editButton)
-                .addGap(91, 91, 91)
-                .addComponent(deleteButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(inventoryFiltersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addGap(153, 153, 153)
+                            .addComponent(addPartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(inventoryFiltersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+
+        cartTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(cartTable);
+
+        checkoutButton.setText("Checkout");
+        checkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutButtonActionPerformed(evt);
+            }
+        });
+
+        removePartButton.setText("REMOVE PART");
+        removePartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removePartButtonActionPerformed(evt);
+            }
+        });
+
+        clearOrderButton.setText("CLEAR ORDER");
+        clearOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearOrderButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                    .addComponent(removePartButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                    .addComponent(clearOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 316, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(removePartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addComponent(clearOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(checkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
+
+        yourCartHeader.setFont(new java.awt.Font("Candara Light", 1, 36)); // NOI18N
+        yourCartHeader.setText("YOUR CART");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -408,14 +390,18 @@ public class saleCreation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(inventoryMainHeader)
-                .addGap(521, 521, 521))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(inventoryMainHeader)
+                .addGap(521, 521, 521))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(yourCartHeader)
+                .addGap(531, 531, 531))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,10 +409,12 @@ public class saleCreation extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(inventoryMainHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(yourCartHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -721,111 +709,22 @@ public class saleCreation extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_sortAlphaDESCOrderButtonActionPerformed
 
-    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
+    private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
 
-        // Check if a row is selected
-        int selectedRow = inventoryTable.getSelectedRow();
-        if (selectedRow == -1) {
-            
-            // No row selected, show a message
-            JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-            return;
-        }
+    }//GEN-LAST:event_addPartButtonActionPerformed
 
-        // Get the part_id from the selected row
-        int partId = (int) inventoryTable.getValueAt(selectedRow, 0);
+    private void removePartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartButtonActionPerformed
 
-        manager.updatePart(partId, 1);
+  
+    }//GEN-LAST:event_removePartButtonActionPerformed
 
-        // Refresh the table
-        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    private void clearOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOrderButtonActionPerformed
 
-        JOptionPane.showMessageDialog(this, "Quantity updated successfully.");
-    }//GEN-LAST:event_AddButtonActionPerformed
+    }//GEN-LAST:event_clearOrderButtonActionPerformed
 
-    private void removeOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeOneButtonActionPerformed
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
 
-        // Check if a row is selected
-        int selectedRow = inventoryTable.getSelectedRow();
-        if (selectedRow == -1) {
-            // No row selected, show a message
-            JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-            return;
-        }
-
-        // Get the part_id from the selected row
-        int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
-
-        boolean success = manager.updatePart(partId, -1);
-
-        if (success) {
-            // Refresh the table
-            populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
-
-            JOptionPane.showMessageDialog(this, "Quantity decreased by 1.");
-        } else {
-            //Report error on quantity
-            JOptionPane.showMessageDialog(this, "Cannot decrease quantity below zero.");
-        }
-    }//GEN-LAST:event_removeOneButtonActionPerformed
-
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-
-// Check if a row is selected
-        int selectedRow = inventoryTable.getSelectedRow();
-        if (selectedRow == -1) {
-            // No row selected, show a message
-            JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-            return;
-        }
-
-        // Get the part_id from the selected row
-        int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
-
-        // ask again  
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this part?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
-
-        if (confirm == JOptionPane.YES_OPTION) {
-            boolean success = manager.deletePart(partId);
-
-            if (success) {
-                // Refresh the table
-                populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
-
-                // Show success message
-                JOptionPane.showMessageDialog(this, "Part deleted successfully.");
-            } else {
-                // Error message
-                JOptionPane.showMessageDialog(this, "Failed to delete part.");
-            }
-        } 
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-    // Check if a row is selected
-    int selectedRow = inventoryTable.getSelectedRow();
-    if (selectedRow == -1) {
-        // No row selected, show a message
-        JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-        return;
-    }
-
-    // Get the part_id from the selected row
-    int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
-
-    // Find the selected part
-    Part selectedPart = manager.findPartByID(partId);
-    if (selectedPart != null) {
-        // Create an instance of editPanel and pass the selected part
-        editPanel editPanelInstance = new editPanel(selectedPart);
-        editPanelInstance.setVisible(true);
-
-
-        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
-    } else {
-        JOptionPane.showMessageDialog(this, "Part not found.");
-    }   
-    }//GEN-LAST:event_editButtonActionPerformed
+    }//GEN-LAST:event_checkoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -970,38 +869,35 @@ public class saleCreation extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddButton;
-    private javax.swing.JLabel advancedSearchLabel;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
+    private javax.swing.JButton addPartButton;
+    private javax.swing.JTable cartTable;
+    private javax.swing.JButton checkoutButton;
+    private javax.swing.JButton clearOrderButton;
     private javax.swing.JToggleButton engineTagButton;
     private javax.swing.JToggleButton fuselageTagButton;
     private javax.swing.JToggleButton highQuantityFilterButton;
     private javax.swing.JPanel inventoryFiltersPanel;
     private javax.swing.JLabel inventoryMainHeader;
     private javax.swing.JTable inventoryTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToggleButton lowQuantityFilterButton;
     private javax.swing.JLabel orderByLabel;
     private javax.swing.JToggleButton paintsTagButton;
-    private javax.swing.JTextField partIDEntryTextField;
-    private javax.swing.JLabel partIDLabel;
-    private javax.swing.JTextField partNameEntryField;
-    private javax.swing.JLabel partNameLabel;
     private javax.swing.JLabel partTagsLabel;
     private javax.swing.JToggleButton priceASCOrderButton;
     private javax.swing.JToggleButton priceDESCOrderButton;
-    private javax.swing.JButton removeOneButton;
+    private javax.swing.JButton removePartButton;
     private javax.swing.JToggleButton sortAlphaASCOrderByButton;
     private javax.swing.JToggleButton sortAlphaDESCOrderButton;
     private javax.swing.JToggleButton toReplenishFilterButton;
     private javax.swing.JToggleButton wingsTagButton;
+    private javax.swing.JLabel yourCartHeader;
     // End of variables declaration//GEN-END:variables
 }

@@ -65,7 +65,7 @@ public class inventoryManager {
         
     }
     
-    public boolean updatePart(int inPID, int inQty){
+    public boolean updatePartQty(int inPID, int inQty){
     Part p = findPartByID(inPID);
     if (p != null) {
         return p.updateQuantity(inQty);

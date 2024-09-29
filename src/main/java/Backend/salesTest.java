@@ -4,14 +4,15 @@
  */
 package Backend;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author darre
  */
 public class salesTest {
     public static void main(String[] args) {
-        saleManager manager = new saleManager();
-        System.out.println(manager.toString(1));
+        saleManager manager = new saleManager();    
     }
     
 }

@@ -90,7 +90,45 @@ public class saleManager {
         
     }
     
-    public void createSale(){
+    
+    public void createSale(ArrayList<Part> inParts, int inTotal, int clientID){
+        try {
+            DB.connect();
+            
+            //Dealing with the inventory
+            for(int i = 0; i < inParts.size();i++){
+                Part p = inParts.get(i);
+                
+                
+                ResultSet currentQuantityTable = DB.query("SELECT Quantity FROM sys.inventory WHERE part_ID = " + p.getPartID() + ";");
+                currentQuantityTable.next();
+                int currentQuantity = currentQuantityTable.getInt(1);
+                
+                int newQuantity = -p.getQuantity();
+                manager.updatePartQty(p.getPartID(), newQuantity);
+            }
+            
+            //Creating sale entry
+            ResultSet highestSaleIDTABLE = DB.query("SELECT sale_ID FROM sys.sales order by sale_ID DESC LIMIT 1;");
+            highestSaleIDTABLE.next();
+            int highestSaleID = highestSaleIDTABLE.getInt(1);
+            int newSaleID = highestSaleID + 1;
+            
+            for(int i = 0; i < inParts.size(); i++){
+                Part p = inParts.get(i);
+                int quantity = p.getQuantity();
+                DB.update("INSERT INTO `sys`.`sales` (`sale_ID`, `ClientID`, `PartID`, `Quantity`) VALUES (" + newSaleID + "," + clientID + "," + p.getPartID() +"," + quantity + ");");
+            }
+            
+            System.out.println("Your sale was created");
+
+            
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(saleManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(saleManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
