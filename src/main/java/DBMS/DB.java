@@ -11,6 +11,7 @@ import java.sql.SQLException;
  * @author dazzl
  */
 public class DB {
+    // Making the global variables of the class, i.e this is all the things required ot connect to my personal rain cloud. 
     private static final String driver = "com.mysql.cj.jdbc.Driver";
     private static final String url = "jdbc:mysql://127.0.0.1:3306/sys";
     private static final String user = "darren";
@@ -19,6 +20,7 @@ public class DB {
     private static ResultSet resultSet;
     private static Connection conn;
 
+    //Connects and ensures the connection to the database is working
     public static void connect() throws ClassNotFoundException, SQLException {
         if (conn == null || conn.isClosed()) {
             Class.forName(driver);

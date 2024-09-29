@@ -6,6 +6,7 @@ package UI;
 
 import Backend.Part;
 import Backend.inventoryManager;
+import Backend.saleManager;
 import DBMS.DB;
 import java.util.List;
 import java.sql.ResultSet;
@@ -27,20 +28,29 @@ import javax.swing.table.DefaultTableModel;
  * @author dazzl
  */
 public class saleCreation extends javax.swing.JFrame {
-
+    
+    //Globl variabls for the class
     private inventoryManager manager;
+    
+    //Fiters for the inventory
     private String currentCategoryFilter = "";
     private String currentQuantityFilter = "";
     private String currentSortOrder = "";
+    
+    // An array list which stores the current items in the cart.
+    private ArrayList<Part> cartItems = new ArrayList<>();
 
     /**
      *
      */
     public saleCreation() {
         initComponents();
+        //Creates the inventory manager
         this.manager = new inventoryManager();
+        
+        //Populates the inventory table with no filters
         populateTable("", "", "");
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
 
     }
 
@@ -422,8 +432,8 @@ public class saleCreation extends javax.swing.JFrame {
 
     private void engineTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_engineTagButtonActionPerformed
         if (engineTagButton.isSelected()) {
-            
-            // Deselect other category buttons
+
+            //Deselect other category buttons
             fuselageTagButton.setSelected(false);
             wingsTagButton.setSelected(false);
             paintsTagButton.setSelected(false);
@@ -434,7 +444,7 @@ public class saleCreation extends javax.swing.JFrame {
         } else {
             currentCategoryFilter = "";
 
-            // Reset background color to default
+            //  Reset background color to default
             engineTagButton.setBackground(Color.white);
         }
 
@@ -443,14 +453,14 @@ public class saleCreation extends javax.swing.JFrame {
         wingsTagButton.setBackground(Color.white);
         paintsTagButton.setBackground(Color.white);
 
-        //Re-poplates table
+        //Repoplates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
 
     }//GEN-LAST:event_engineTagButtonActionPerformed
 
     private void fuselageTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuselageTagButtonActionPerformed
         if (fuselageTagButton.isSelected()) {
-            
+
             //Deselect other category buttons
             engineTagButton.setSelected(false);
             wingsTagButton.setSelected(false);
@@ -471,13 +481,13 @@ public class saleCreation extends javax.swing.JFrame {
         wingsTagButton.setBackground(Color.white);
         paintsTagButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_fuselageTagButtonActionPerformed
 
     private void wingsTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wingsTagButtonActionPerformed
         if (wingsTagButton.isSelected()) {
-           
+
             // Deselect other category buttons
             engineTagButton.setSelected(false);
             fuselageTagButton.setSelected(false);
@@ -498,7 +508,7 @@ public class saleCreation extends javax.swing.JFrame {
         fuselageTagButton.setBackground(Color.white);
         paintsTagButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_wingsTagButtonActionPerformed
 
@@ -548,13 +558,13 @@ public class saleCreation extends javax.swing.JFrame {
         lowQuantityFilterButton.setBackground(Color.white);
         toReplenishFilterButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_highQuantityFilterButtonActionPerformed
 
     private void lowQuantityFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowQuantityFilterButtonActionPerformed
         if (lowQuantityFilterButton.isSelected()) {
-            
+
             // Deselect other quantity filter buttons
             highQuantityFilterButton.setSelected(false);
             toReplenishFilterButton.setSelected(false);
@@ -573,7 +583,7 @@ public class saleCreation extends javax.swing.JFrame {
         highQuantityFilterButton.setBackground(Color.white);
         toReplenishFilterButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_lowQuantityFilterButtonActionPerformed
 
@@ -597,13 +607,13 @@ public class saleCreation extends javax.swing.JFrame {
         lowQuantityFilterButton.setBackground(Color.white);
         highQuantityFilterButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_toReplenishFilterButtonActionPerformed
 
     private void priceASCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceASCOrderButtonActionPerformed
         if (priceASCOrderButton.isSelected()) {
-            
+
             // Deselect other sorting buttons
             priceDESCOrderButton.setSelected(false);
             sortAlphaASCOrderByButton.setSelected(false);
@@ -624,13 +634,13 @@ public class saleCreation extends javax.swing.JFrame {
         sortAlphaASCOrderByButton.setBackground(Color.white);
         sortAlphaDESCOrderButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_priceASCOrderButtonActionPerformed
 
     private void priceDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceDESCOrderButtonActionPerformed
         if (priceDESCOrderButton.isSelected()) {
-            
+
             // Deselect other sorting buttons
             priceASCOrderButton.setSelected(false);
             sortAlphaASCOrderByButton.setSelected(false);
@@ -651,13 +661,13 @@ public class saleCreation extends javax.swing.JFrame {
         sortAlphaASCOrderByButton.setBackground(Color.white);
         sortAlphaDESCOrderButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_priceDESCOrderButtonActionPerformed
 
     private void sortAlphaASCOrderByButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaASCOrderByButtonActionPerformed
         if (sortAlphaASCOrderByButton.isSelected()) {
-            
+
             // Deselect other sorting buttons
             priceASCOrderButton.setSelected(false);
             priceDESCOrderButton.setSelected(false);
@@ -678,13 +688,13 @@ public class saleCreation extends javax.swing.JFrame {
         priceDESCOrderButton.setBackground(Color.white);
         sortAlphaDESCOrderButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_sortAlphaASCOrderByButtonActionPerformed
 
     private void sortAlphaDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaDESCOrderButtonActionPerformed
         if (sortAlphaDESCOrderButton.isSelected()) {
-            
+
             // Deselect other sorting buttons
             priceASCOrderButton.setSelected(false);
             priceDESCOrderButton.setSelected(false);
@@ -705,25 +715,156 @@ public class saleCreation extends javax.swing.JFrame {
         priceDESCOrderButton.setBackground(Color.white);
         sortAlphaASCOrderByButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_sortAlphaDESCOrderButtonActionPerformed
 
     private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
+        
+        //Get;s the selected row from the table
+        int selectedRow = inventoryTable.getSelectedRow();
+        
+        //If no part is selected display an error message
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a part to add.");
+            return;
+        }
 
+        //get the part id in the selected row
+        int partID = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
+        
+        //Finds the part object using the inventory manager
+        Part inventoryPart = manager.findPartByID(partID);
+
+        // If the manager reports null, then there is an error and the part does not exist
+        if (inventoryPart == null) {
+            JOptionPane.showMessageDialog(this, "Selected part not found.");
+            return;
+        }
+        
+        // There is no stock of the current object
+        if (inventoryPart.getQuantity() <= 0) {
+            JOptionPane.showMessageDialog(this, "Selected part is out of stock.");
+            return;
+        }
+
+        //Reduces the quantity of the part in the inventory by 1 to reflect it beign added to the cart
+        inventoryPart.updateQuantity(-1);
+        //Adds the part to the cart
+        addToCart(inventoryPart);
+        
+        //Repopulates both tables to reflect the updated cases for each of the inventorys
+        populateCartTable();
+        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_addPartButtonActionPerformed
 
     private void removePartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartButtonActionPerformed
 
-  
+        //Get's the current;y se;ected row of the table
+        int selectedRow = cartTable.getSelectedRow();
+        
+        // If a row is not selected, prompt the user with an error
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a part to remove.");
+            return;
+        }
+        
+        //Get the partID from the currently selected line of the table.
+        int partID = Integer.parseInt(cartTable.getValueAt(selectedRow, 0).toString());
+        
+        //Creates cartPart object
+        Part cartPart = null;
+        
+        //A for each loop which goes through each item and does the following
+        for (Part part : cartItems) {
+            
+            //Ensures that the part Id is equal to that of the part we are looking for
+            if (part.getPartID() == partID) {
+                // Adds this part to the cart
+                cartPart = part;
+                break;
+            }
+        }
+
+        //This is the error case, if a part is not found an error message is displaued
+        if (cartPart == null) {
+            JOptionPane.showMessageDialog(this, "Selected part not found in cart.");
+            return;
+        }
+        
+        //Set's the quantity of the current part in the cart to negative one to ensure that the cart items table reflect it. 
+        cartPart.setQuantity(cartPart.getQuantity() - 1);
+        
+        //If the part is equal to zero, or goes below zero, it removes the part from the cart Jtable
+        if (cartPart.getQuantity() <= 0) {
+            cartItems.remove(cartPart);
+        }
+        
+        //Creates an inventory part object which then finds the part based off the cartPart ID
+        Part inventoryPart = manager.findPartByID(partID);
+        
+        //If it found that this part is infact real the quanitites are updated
+        if (inventoryPart != null) {
+            inventoryPart.updateQuantity(1);
+        }
+        
+        //Re populates the table to showcase he removed part
+        populateCartTable();
+        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+
     }//GEN-LAST:event_removePartButtonActionPerformed
 
     private void clearOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOrderButtonActionPerformed
+        // Initiates a for each loop which enacts on each item.
+        for (Part cartPart : cartItems) {
+            //Finds the part in the inventory to which the cart part will update
+            Part inventoryPart = manager.findPartByID(cartPart.getPartID());
+            
+            //If it is found in the invetory then the inventory part is updated by the quanityt of the parts that were in the cart
+            if (inventoryPart != null) {
+                
+                //Get's the quantiy of items that were in the cart and updates the inventory to add back that same amount of parts
+                inventoryPart.updateQuantity(cartPart.getQuantity());
+            }
+        }
 
+        //Calls upon the clear method
+        cartItems.clear();
+        
+        //Repopulates the table to showcases the changes.
+        populateCartTable();
+        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_clearOrderButtonActionPerformed
 
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
+        //checks if the users cart is empty, if so display a prompt
+        if (cartItems.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Your cart is empty.");
+            return;
+        }
 
+        //Get's the CLIENTID registered to this sale
+        int clientID = Integer.parseInt(JOptionPane.showInputDialog("Please specify client ID")); // FOR TESTNG PURPOSES THIS REMIAINS 1, WE NEED TO INPUT THE ACTUAL CLIENT ID IN HERE
+        //The total for the sale
+        int totalAmount = 0;
+        
+        //Does a for each loop to calcualte the total of each item
+        for (Part part : cartItems) {
+            totalAmount += part.getPrice() * part.getQuantity();
+        }
+        
+        // Created a new slaemanager obkect to manage the sale
+        saleManager saleMgr = new saleManager();
+        //Creates the sale using the inputted details
+        saleMgr.createSale(new ArrayList<>(cartItems), totalAmount, clientID);
+        
+        //Clears the users cart
+        cartItems.clear();
+
+        //Repupulates the table to relfect the changes
+        populateCartTable();
+        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+        JOptionPane.showMessageDialog(this, "Checkout complete. Sale recorded.");
     }//GEN-LAST:event_checkoutButtonActionPerformed
 
     /**
@@ -761,29 +902,34 @@ public class saleCreation extends javax.swing.JFrame {
             }
         });
     }
-
+    
+    //Method used to populate the inventory table
     private void populateTable(String categoryFilter, String quantityFilter, String sortOrder) {
         DefaultTableModel tableModel = new DefaultTableModel();
 
         try {
 
-            // Connects to the Database
+            // Connects to the database
             DB.connect();
 
-            //Query
+            //The query used
             String query = "SELECT parts.part_id, parts.part_name, parts.price, parts.category, "
                     + "COALESCE(inventory.quantity, 0) AS quantity "
                     + "FROM parts "
                     + "LEFT JOIN inventory ON parts.part_id = inventory.part_id";
 
-            // Build the WHERE clause based on filters
+            //Creates an array list which is then used to build the filter conditions
             List<String> conditions = new ArrayList<>();
-
+            
+            //Checks if the filter is on, if it is build the new SQL query
             if (categoryFilter != null && !categoryFilter.isEmpty()) {
                 conditions.add("parts.category = '" + categoryFilter + "'");
             }
-
+            
+            //Checks if the catogory filter buttons are clicked, if so build new sql statment
             if (quantityFilter != null && !quantityFilter.isEmpty()) {
+                
+                // Switcch case based off the currently selected filters, builds the new query
                 switch (quantityFilter) {
                     case "LOW":
                         conditions.add("quantity > 0 AND quantity <= 10");
@@ -797,12 +943,13 @@ public class saleCreation extends javax.swing.JFrame {
 
                 }
             }
-
+            
+            //Checks to see if there are condition buttons clicked, if so join them to this current query in order to build a compound query
             if (!conditions.isEmpty()) {
                 query += " WHERE " + String.join(" AND ", conditions);
             }
 
-            // Add ORDER BY clause based on sortOrder
+            //Add ORDER BY clause based on sortOrder
             if (sortOrder != null && !sortOrder.isEmpty()) {
                 switch (sortOrder) {
                     case "PRICE_ASC":
@@ -820,7 +967,7 @@ public class saleCreation extends javax.swing.JFrame {
                 }
             }
 
-            //Execute the query using DB.query()
+            //Executes the query
             ResultSet resultSet = DB.query(query);
 
             // Get metadata to add column names
@@ -865,6 +1012,68 @@ public class saleCreation extends javax.swing.JFrame {
         } else {
             return "";
         }
+    }
+    
+    //A method to add items to the cart which then helps build the JTABLE
+    private void addToCart(Part partToAdd) {
+        //A boolean to store if a part is in a cart or not.
+        boolean partExistsInCart = false;
+        
+        //A for each loop that checks if the item is already in the cart if so add the part to the corect and as such increases it's quanity in the cart
+        for (Part cartPart : cartItems) {
+            if (cartPart.getPartID() == partToAdd.getPartID()) {
+                //Increases the quantity of the items in the cart
+                cartPart.setQuantity(cartPart.getQuantity() + 1);
+                //Set's the boolean to true
+                partExistsInCart = true;
+                break;
+            }
+        }
+        
+        //If the item is not in the cart, make a new entry into the table
+        if (!partExistsInCart) {
+            
+            //Adds the correct attributes to the JTable to ensure it works correctly.
+            Part cartPart = new Part(
+                    partToAdd.getPartID(),
+                    partToAdd.getName(),
+                    partToAdd.getPrice(),
+                    partToAdd.getCatogory(),
+                    1
+            );
+            // aDds the itme to the cart part array list.
+            cartItems.add(cartPart);
+        }
+    }
+    
+    // The method used to create a visual representation in the form of a jtable of the users parts
+    private void populateCartTable() {
+        //Set's the tables default model
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        //Adds the required collumms for the part data
+        tableModel.addColumn("Part ID");
+        tableModel.addColumn("Part Name");
+        tableModel.addColumn("Price");
+        tableModel.addColumn("Category");
+        tableModel.addColumn("Quantity");
+
+        //Does a for each loop to ensure each part in the cart items array list is added to the table
+        for (Part part : cartItems) {
+            Object[] rowData = new Object[]{
+                part.getPartID(),
+                part.getName(),
+                part.getPrice(),
+                part.getCatogory(),
+                part.getQuantity()
+            };
+            
+            //Adds a row for the next part to be entered into
+            tableModel.addRow(rowData);
+        }
+        
+        //sets the table model
+        cartTable.setModel(tableModel);
     }
 
 

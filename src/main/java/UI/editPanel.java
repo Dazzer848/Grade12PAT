@@ -18,18 +18,33 @@ import javax.swing.JOptionPane;
  * @author dazzl
  */
 public class editPanel extends javax.swing.JFrame {
+
+    // The global variables that are required for fulling in the data on this screen.
     private Part part;
     private inventoryManager manager;
+
     /**
      * Creates new form editPanel
      */
+    //Building site
     public editPanel(Part selectedPart) {
-    initComponents();
-    this.part = selectedPart;
-    this.manager = new inventoryManager();
-    populateFields();
-    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-    catagorySelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ENGINE", "FUSELAGE", "WINGS", "PAINTS" }));
+        initComponents();
+        // Set's the global variable ( I.e the part data we need ) to the class specific part
+        this.part = selectedPart;
+        
+        //Makes an inventory manager
+        this.manager = new inventoryManager();
+        
+        // This method populates the UI components with the data from the class
+        populateFields();
+        
+        // Disposes the screen on close but not the whole prgram
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        // Populates the combo box with the correct fields which can be selected for a part
+        catagorySelectionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"ENGINE", "FUSELAGE", "WINGS", "PAINTS"}));
+        
+        //Places the screen in the middle of the users display
         setLocationRelativeTo(null);
 
     }
@@ -142,62 +157,73 @@ public class editPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Enetering the name of the part
     private void enterPartNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterPartNameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_enterPartNameTextFieldActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-    //Validate and approve the data
-    String partName = enterPartNameTextField.getText().trim();
-    String category = catagorySelectionComboBox.getSelectedItem().toString();
-    int price = (int) itemPriceSpinner.getValue();
-    int quantity = (int) itemQuantitySpinner.getValue();
+        //Validate and approve the data
+        
+        //Gets the new name of the part as entered
+        String partName = enterPartNameTextField.getText();
+        
+        //Get's the catogory that the user selected
+        String category = catagorySelectionComboBox.getSelectedItem().toString();
+        
+        //Get's the price that the user entered
+        int price = (int) itemPriceSpinner.getValue();
+        
+        // Get's the quantity entered
+        int quantity = (int) itemQuantitySpinner.getValue();
 
-    //Validation
-    if (partName.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Part name cannot be empty.");
-        return;
-    }
+        //Validation
+        if (partName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Part name cannot be empty.");
+            return;
+        }
 
-    // Update the part object
-    part.setName(partName);
-    part.setCatogory(category);
-    part.setPrice(price);
-    part.setQuantity(quantity);
+        //Update the part object to relfect the changes
+        part.setName(partName);
+        part.setCatogory(category);
+        part.setPrice(price);
+        part.setQuantity(quantity);
 
-    // Update the database
-    boolean success = manager.updatePartDetails(part);
+        // Update the database
+        boolean success = manager.updatePartDetails(part);
 
-    if (success) {
-        JOptionPane.showMessageDialog(this, "Part updated successfully.");
-        this.dispose();
-    } else {
-        JOptionPane.showMessageDialog(this, "Failed to update part.");
-    }
+        //Ensures the success of the operation
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Part updated successfully.");
+            this.dispose();
+            
+        }
+        //Reports an error
+        else {
+            JOptionPane.showMessageDialog(this, "Failed to update part.");
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
+    
+    // The metod which fills in the data of the UI components
+    private void populateFields() {
+        //Makes Enters the item's ID
+        enterItemIDTextField.setText(String.valueOf(part.getPartID()));
+        
+        //Ensures that the item ID cannot be edited
+        enterItemIDTextField.setEditable(false);
+        
+        //Fills in the name of the part
+        enterPartNameTextField.setText(part.getName());
 
-    /**
-     * @param args the command line arguments
-     */
+        // Set category in JComboBox
+        catagorySelectionComboBox.setSelectedItem(part.getCatogory());
 
- private void populateFields() {
-    enterItemIDTextField.setText(String.valueOf(part.getPartID()));
-    enterItemIDTextField.setEditable(false); // Make it read-only if desired
+        // Set price in JSpinner
+        itemPriceSpinner.setValue(part.getPrice());
 
-    enterPartNameTextField.setText(part.getName());
-
-    // Set category in JComboBox
-    catagorySelectionComboBox.setSelectedItem(part.getCatogory());
-
-    // Set price in JSpinner
-    itemPriceSpinner.setValue(part.getPrice());
-
-    // Set quantity in JSpinner
-    itemQuantitySpinner.setValue(part.getQuantity());
-}
-
-
-
+        // Set quantity in JSpinner
+        itemQuantitySpinner.setValue(part.getQuantity());
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

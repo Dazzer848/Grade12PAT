@@ -8,6 +8,7 @@ package UI;
  *
  * @author dazzl
  */
+// THIS AINT DONE YET BROTHER, WHAT IS THIS EVEN FOR!
 public class clientEditor extends javax.swing.JFrame {
 
     /**

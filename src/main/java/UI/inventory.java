@@ -29,7 +29,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class inventory extends javax.swing.JFrame {
 
+    //Global variables of the program
     private inventoryManager manager;
+    
+    //The filters that will be used in the inventory table
     private String currentCategoryFilter = "";
     private String currentQuantityFilter = "";
     private String currentSortOrder = "";
@@ -37,9 +40,13 @@ public class inventory extends javax.swing.JFrame {
     /**
      *
      */
+    //Bob the builder can he fix it!
     public inventory() {
         initComponents();
+        // mKAES the inventory manager object
         this.manager = new inventoryManager();
+        
+        //Populates the table for the first time with no filters
         populateTable("", "", "");
         setLocationRelativeTo(null); 
 
@@ -412,7 +419,9 @@ public class inventory extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
+    //The filter button which ensures on Parts of the Engine catogory are shown
     private void engineTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_engineTagButtonActionPerformed
         if (engineTagButton.isSelected()) {
             
@@ -440,7 +449,8 @@ public class inventory extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
 
     }//GEN-LAST:event_engineTagButtonActionPerformed
-
+    
+       //The filter button which ensures on Parts of the fuselafe catogory are shown
     private void fuselageTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuselageTagButtonActionPerformed
         if (fuselageTagButton.isSelected()) {
             
@@ -467,7 +477,7 @@ public class inventory extends javax.swing.JFrame {
         //Re-populates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_fuselageTagButtonActionPerformed
-
+   //The filter button which ensures on Parts of the wings catogory are shown
     private void wingsTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wingsTagButtonActionPerformed
         if (wingsTagButton.isSelected()) {
            
@@ -494,7 +504,7 @@ public class inventory extends javax.swing.JFrame {
         //Re-populates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_wingsTagButtonActionPerformed
-
+   //The filter button which ensures on Parts of the Engine catogory are shown
     private void paintsTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paintsTagButtonActionPerformed
         if (paintsTagButton.isSelected()) {
             // Deselect other category buttons
@@ -520,10 +530,10 @@ public class inventory extends javax.swing.JFrame {
         //Re-populates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_paintsTagButtonActionPerformed
-
+   // Filters the table so that only items with a high quanity are shown
     private void highQuantityFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_highQuantityFilterButtonActionPerformed
         if (highQuantityFilterButton.isSelected()) {
-            // Deselect other quantity filter buttons
+            //Deselect other quantity filter buttons
             lowQuantityFilterButton.setSelected(false);
             toReplenishFilterButton.setSelected(false);
             currentQuantityFilter = "HIGH";
@@ -545,6 +555,7 @@ public class inventory extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_highQuantityFilterButtonActionPerformed
 
+       // Filters the table so that only items with a low quanity are shown
     private void lowQuantityFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowQuantityFilterButtonActionPerformed
         if (lowQuantityFilterButton.isSelected()) {
             
@@ -569,7 +580,7 @@ public class inventory extends javax.swing.JFrame {
         //Re-populates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_lowQuantityFilterButtonActionPerformed
-
+    //Filters the table so that only items with nothing lefts is shown
     private void toReplenishFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toReplenishFilterButtonActionPerformed
         if (toReplenishFilterButton.isSelected()) {
             // Deselect other quantity filter buttons
@@ -594,6 +605,7 @@ public class inventory extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_toReplenishFilterButtonActionPerformed
 
+       //Order the jTable to showcase price in ascending order
     private void priceASCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceASCOrderButtonActionPerformed
         if (priceASCOrderButton.isSelected()) {
             
@@ -605,7 +617,9 @@ public class inventory extends javax.swing.JFrame {
 
             // Change background color to green
             priceASCOrderButton.setBackground(Color.GREEN);
-        } else {
+        }
+        //set's the current sort order to nothing if the button is deselected
+        else {
             currentSortOrder = "";
 
             // Reset background color to default
@@ -621,10 +635,11 @@ public class inventory extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_priceASCOrderButtonActionPerformed
 
+    //Set's the JTable to display the obkects in Descing order
     private void priceDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceDESCOrderButtonActionPerformed
         if (priceDESCOrderButton.isSelected()) {
             
-            // Deselect other sorting buttons
+            //Deselect other sorting buttons
             priceASCOrderButton.setSelected(false);
             sortAlphaASCOrderByButton.setSelected(false);
             sortAlphaDESCOrderButton.setSelected(false);
@@ -648,6 +663,7 @@ public class inventory extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_priceDESCOrderButtonActionPerformed
 
+    //Sorts the Jtable by alphabetical order
     private void sortAlphaASCOrderByButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaASCOrderByButtonActionPerformed
         if (sortAlphaASCOrderByButton.isSelected()) {
             
@@ -675,6 +691,7 @@ public class inventory extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_sortAlphaASCOrderByButtonActionPerformed
 
+    //Sorts the opoosite way of alphabetical 
     private void sortAlphaDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaDESCOrderButtonActionPerformed
         if (sortAlphaDESCOrderButton.isSelected()) {
             
@@ -702,20 +719,22 @@ public class inventory extends javax.swing.JFrame {
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_sortAlphaDESCOrderButtonActionPerformed
 
+    //This button adds item's to the inventory
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
 
-        // Check if a row is selected
+        //Check if a row is selected
         int selectedRow = inventoryTable.getSelectedRow();
         if (selectedRow == -1) {
             
-            // No row selected, show a message
+            // No row selected, show an errors message
             JOptionPane.showMessageDialog(this, "Please select a part from the table.");
             return;
         }
 
-        // Get the part_id from the selected row
+        //Get the part ID fromt he selected row
         int partId = (int) inventoryTable.getValueAt(selectedRow, 0);
 
+        //Updates the number of parts in the table
         manager.updatePartQty(partId, 1);
 
         // Refresh the table
@@ -734,9 +753,10 @@ public class inventory extends javax.swing.JFrame {
             return;
         }
 
-        // Get the part_id from the selected row
+        //eGet's the part ID fromt he currently selected part
         int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
 
+        //Defines the success of the operation
         boolean success = manager.updatePartQty(partId, -1);
 
         if (success) {
@@ -755,28 +775,28 @@ public class inventory extends javax.swing.JFrame {
 // Check if a row is selected
         int selectedRow = inventoryTable.getSelectedRow();
         if (selectedRow == -1) {
-            // No row selected, show a message
+            //No row selected, show a message
             JOptionPane.showMessageDialog(this, "Please select a part from the table.");
             return;
         }
 
-        // Get the part_id from the selected row
+        //Get's the Part ID of the currently selected part.
         int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
 
-        // ask again  
+        //Asks for the users confrimation
         int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this part?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
             boolean success = manager.deletePart(partId);
 
             if (success) {
-                // Refresh the table
+                //Refresh the table
                 populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
 
-                // Show success message
+                //Show success message
                 JOptionPane.showMessageDialog(this, "Part deleted successfully.");
             } else {
-                // Error message
+                //Show eerro message
                 JOptionPane.showMessageDialog(this, "Failed to delete part.");
             }
         } 
@@ -791,10 +811,10 @@ public class inventory extends javax.swing.JFrame {
         return;
     }
 
-    // Get the part_id from the selected row
+    //Get the part ID of the selected part
     int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
 
-    // Find the selected part
+    //Find the selected part
     Part selectedPart = manager.findPartByID(partId);
     if (selectedPart != null) {
         // Create an instance of editPanel and pass the selected part
@@ -802,6 +822,7 @@ public class inventory extends javax.swing.JFrame {
         editPanelInstance.setVisible(true);
 
 
+        // Repopulates the table with the currently applied filters 
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     } else {
         JOptionPane.showMessageDialog(this, "Part not found.");
@@ -848,7 +869,7 @@ public class inventory extends javax.swing.JFrame {
 
         try {
 
-            // Connects to the Database
+            //Connects to the database
             DB.connect();
 
             //Query
@@ -857,13 +878,16 @@ public class inventory extends javax.swing.JFrame {
                     + "FROM parts "
                     + "LEFT JOIN inventory ON parts.part_id = inventory.part_id";
 
-            // Build the WHERE clause based on filters
+            //Builds the WHERE clause based on filters
             List<String> conditions = new ArrayList<>();
 
+            //If there is a defined filter, this clause adds the spcae for that filter to be applied to the query which is then executed. This is catogory
             if (categoryFilter != null && !categoryFilter.isEmpty()) {
+                //Adds the filter to SQL
                 conditions.add("parts.category = '" + categoryFilter + "'");
             }
-
+            
+            //Creates a swithc case for the filters based on the filters for quantity.
             if (quantityFilter != null && !quantityFilter.isEmpty()) {
                 switch (quantityFilter) {
                     case "LOW":
@@ -878,12 +902,13 @@ public class inventory extends javax.swing.JFrame {
 
                 }
             }
-
+            
+            //Checks if the conditions array list is empty, if not add in the clauses.
             if (!conditions.isEmpty()) {
                 query += " WHERE " + String.join(" AND ", conditions);
             }
 
-            // Add ORDER BY clause based on sortOrder
+            //Add ORDER BY clause based on sortOrder
             if (sortOrder != null && !sortOrder.isEmpty()) {
                 switch (sortOrder) {
                     case "PRICE_ASC":
@@ -901,10 +926,10 @@ public class inventory extends javax.swing.JFrame {
                 }
             }
 
-            //Execute the query using DB.query()
+            //Executres the query
             ResultSet resultSet = DB.query(query);
 
-            // Get metadata to add column names
+            //Get metadata to add column names
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
 
@@ -913,7 +938,7 @@ public class inventory extends javax.swing.JFrame {
                 tableModel.addColumn(metaData.getColumnName(i));
             }
 
-            // Add rows to the table model
+            //Add rows to the table model
             while (resultSet.next()) {
                 Object[] rowData = new Object[columnCount];
                 for (int i = 1; i <= columnCount; i++) {
@@ -925,7 +950,7 @@ public class inventory extends javax.swing.JFrame {
             // Set the model to your JTable
             inventoryTable.setModel(tableModel);
 
-            // Close the resultSet
+            //Shut it down
             resultSet.close();
 
         } catch (ClassNotFoundException | SQLException pleaseDontGiveMeErrors) {

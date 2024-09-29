@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *
  * @author darre
  */
+//A test class used to test methods. This aint the final thing chief
 public class salesTest {
     public static void main(String[] args) {
         saleManager manager = new saleManager();    

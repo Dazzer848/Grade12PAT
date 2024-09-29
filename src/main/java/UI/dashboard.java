@@ -8,11 +8,13 @@ package UI;
  *
  * @author dazzl
  */
+//Now this right here is not developed, it's two buttons. What on earth are you even doing here
 public class dashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form dashboard
      */
+    //Construction?
     public dashboard() {
         initComponents();
     }
@@ -39,6 +41,11 @@ public class dashboard extends javax.swing.JFrame {
         });
 
         jButton2.setText("SALE CREATOR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -63,12 +70,18 @@ public class dashboard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //Makes the inventory screen visible
     private void inventoryBuuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBuuttonActionPerformed
         new inventory().setVisible(true);
         dispose();
        
     }//GEN-LAST:event_inventoryBuuttonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        new saleCreation().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
