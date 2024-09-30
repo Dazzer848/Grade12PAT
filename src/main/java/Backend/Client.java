@@ -12,11 +12,17 @@ public class Client {
     private String name;
     private int clientID;
     private boolean loyalty;
+    private int totalSpent;
 
-    public Client(String name, int clientID, boolean loyalty) {
+    public Client(String name, int clientID, boolean loyalty, int inTotalSpent) {
         this.name = name;
         this.clientID = clientID;
         this.loyalty = loyalty;
+        this.totalSpent = inTotalSpent;
+    }
+
+    public int getTotalSpent() {
+        return totalSpent;
     }
 
     public String getName() {

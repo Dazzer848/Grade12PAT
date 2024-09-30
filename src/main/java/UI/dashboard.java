@@ -29,22 +29,30 @@ public class dashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        inventoryBuutton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        inventoryButton = new javax.swing.JButton();
+        saleCreatorButton = new javax.swing.JButton();
+        clientEditorButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        inventoryBuutton.setText("INVENTORY");
-        inventoryBuutton.addActionListener(new java.awt.event.ActionListener() {
+        inventoryButton.setText("INVENTORY");
+        inventoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inventoryBuuttonActionPerformed(evt);
+                inventoryButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("SALE CREATOR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        saleCreatorButton.setText("SALE CREATOR");
+        saleCreatorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                saleCreatorButtonActionPerformed(evt);
+            }
+        });
+
+        clientEditorButton.setText("Client Editor");
+        clientEditorButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientEditorButtonActionPerformed(evt);
             }
         });
 
@@ -55,34 +63,42 @@ public class dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(233, 233, 233)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inventoryBuutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                    .addComponent(inventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(saleCreatorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(clientEditorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(344, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(214, Short.MAX_VALUE)
-                .addComponent(inventoryBuutton)
+                .addComponent(inventoryButton)
                 .addGap(71, 71, 71)
-                .addComponent(jButton2)
-                .addGap(189, 189, 189))
+                .addComponent(saleCreatorButton)
+                .addGap(63, 63, 63)
+                .addComponent(clientEditorButton)
+                .addGap(103, 103, 103))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     //Makes the inventory screen visible
-    private void inventoryBuuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryBuuttonActionPerformed
+    private void inventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryButtonActionPerformed
         new inventory().setVisible(true);
-        dispose();
-       
-    }//GEN-LAST:event_inventoryBuuttonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       
+    }//GEN-LAST:event_inventoryButtonActionPerformed
+
+    private void saleCreatorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleCreatorButtonActionPerformed
         new saleCreation().setVisible(true);
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+
+    }//GEN-LAST:event_saleCreatorButtonActionPerformed
+
+    private void clientEditorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientEditorButtonActionPerformed
+        clientEditor clientPanelInstance = new clientEditor();
+        clientPanelInstance.setVisible(true);
+    }//GEN-LAST:event_clientEditorButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -120,7 +136,8 @@ public class dashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton inventoryBuutton;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton clientEditorButton;
+    private javax.swing.JButton inventoryButton;
+    private javax.swing.JButton saleCreatorButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -37,16 +37,26 @@ public class clientManager {
             ResultSet clients = DB.query("SELECT * FROM sys.clients;");
             clients.next();
 
+            //Populates the client object
             for (int i = 0; i < clientsArrSize; i++) {
                 int clientID = clients.getInt(1);
                 String clientName = clients.getString(2);
                 boolean loyalty = clients.getBoolean(3);
+                int totalSpent = clients.getInt(4);
                 
-                Client c = new Client(clientName, clientID, loyalty);
+                //if(totalSpent > 50000){
+                //    DB.update("UPDATE sys.clients SET Loyalty = 1 WHERE (ClientID = " + clientID + ");");
+                //}
+                //else{
+                  //  DB.update("UPDATE sys.clients SET Loyalty = 0 WHERE (ClientID = " + clientID + ");");
+                //}
+                    
+                clients.next();
+                
+                Client c = new Client(clientName, clientID, loyalty, totalSpent);
                 clientsArr[i] = c;
+                size++;
             }
-            
-            //Checks to see if the client has a registered account in the clientsSales table if not make one     
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(clientManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -54,6 +64,16 @@ public class clientManager {
             Logger.getLogger(clientManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    
+    public Client findClientById(int inCID){
+        for(int i = 0; i < size;i++){
+            int clientsID = clientsArr[i].getClientID();
+            if(clientsArr[i].getClientID() == inCID){
+                return clientsArr[i];
+            }
+        }
+        return null;
     }
 
 }

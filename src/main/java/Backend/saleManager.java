@@ -36,10 +36,17 @@ public class saleManager {
             //Connect to the database
             DB.connect();
 
+            int highestSaleID;
             //Get the total number of parts
             ResultSet highestSaleIdTable = DB.query("SELECT sale_ID FROM sys.sales group by sale_ID order by sale_ID DESC;");
-            highestSaleIdTable.next();
-            int highestSaleID = highestSaleIdTable.getInt(1);
+            if(highestSaleIdTable.next()){
+                         highestSaleID = highestSaleIdTable.getInt(1);
+        }
+            else{
+                highestSaleID = 1;
+            }
+            
+            
 
             // Set's the sales array to the max amount of components stored
             salesArr = new Sale[highestSaleID];
@@ -58,14 +65,15 @@ public class saleManager {
 
                 //Creating the clientID which will be used in multiple operations
                 int clientID = 0;
-
+                int saleID = 0;
+                
                 // Get's the parts of the sale in question and then assigns them to the object
                 for (int f = 1; f <= numItemsInSale; f++) {
-                    ResultSet saleTable = DB.query("SELECT * FROM sys.sales where sale_ID = " + f + ";");
+                    ResultSet saleTable = DB.query("SELECT * FROM sys.sales where sale_ID = " + i + ";");
                     saleTable.next();
 
                     // Assigns the values to object
-                    int saleID = saleTable.getInt("sale_ID");
+                    saleID = saleTable.getInt("sale_ID");
                     clientID = saleTable.getInt(2);
                     int partID = saleTable.getInt(3);
                     int quantity = saleTable.getInt(4);
@@ -92,12 +100,14 @@ public class saleManager {
                 loytalyTable.next();
                 boolean loyalty = loytalyTable.getBoolean("Loyalty");
 
+                
                 if (loyalty == true) {
                     total = (int) (total - (total * 0.15));
                 }
 
+   
                 //Registers the new sale
-                Sale s = new Sale(partsInSale, total, quantitiesOfPart);
+                Sale s = new Sale(partsInSale, total, quantitiesOfPart, clientID, saleID);
                 //Adds the sale to the array
                 salesArr[size] = s;
                 size++;
@@ -140,10 +150,15 @@ public class saleManager {
                 manager.updatePartQty(p.getPartID(), newQuantity);
             }
 
+             int highestSaleID = 0;
             //Getting the current highest saleID
             ResultSet highestSaleIDTABLE = DB.query("SELECT sale_ID FROM sys.sales order by sale_ID DESC LIMIT 1;");
-            highestSaleIDTABLE.next();
-            int highestSaleID = highestSaleIDTABLE.getInt(1);
+            if(highestSaleIDTABLE.next()){
+                            highestSaleID = highestSaleIDTABLE.getInt(1);
+            }
+            else{
+                highestSaleID = 0;
+            }
 
             //Creating   the next saleID to be used as a unique identifier for this transaction
             int newSaleID = highestSaleID + 1;
@@ -169,6 +184,7 @@ public class saleManager {
             }
 
                DB.update("UPDATE sys.clients SET TotalSpent = TotalSpent + " + total + " WHERE ClientID = " + clientID + ";");
+               DB.update("INSERT INTO sys.clientsales (client_ID, Sale_ID, Total) VALUES (" + clientID + "," + newSaleID + "," + total+ ");");
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(saleManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -176,5 +192,21 @@ public class saleManager {
             Logger.getLogger(saleManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+    public ArrayList<Sale> findSalesById(int clientID){
+        
+        ArrayList<Sale> salesFromClient = new ArrayList<Sale>();
+        int test = size;
+        System.out.println("Fun!");
+        
+        for(int i = 0; i < size; i++){
+            if(salesArr[i].getClientId() == clientID){
+                salesFromClient.add(salesArr[i]);
+            }
+            else{
+                
+            }
+        }
+        return salesFromClient; 
     }
 }

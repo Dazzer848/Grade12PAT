@@ -13,15 +13,19 @@ import java.util.ArrayList;
 public class Sale {
     
     //The global variables of this class
-    ArrayList<Part> sales = new ArrayList<Part>();
+    private ArrayList<Part> sales = new ArrayList<Part>();
     private int total;
-    ArrayList<Integer> quantities =  new ArrayList<Integer>();
+    private ArrayList<Integer> quantities =  new ArrayList<Integer>();
+    private int clientId;
+    private int saleID;
 
     //Constructor?
-    public Sale(ArrayList<Part> inParts, int inTotal, ArrayList<Integer> inQuantities) {
+    public Sale(ArrayList<Part> inParts, int inTotal, ArrayList<Integer> inQuantities, int inCID, int inSID) {
         this.sales = inParts;
         this.total = inTotal;
         this.quantities = inQuantities;
+        this.clientId = inCID;
+        this.saleID = inSID;
     }
 
     //Returns the list of parts involved in the sale
@@ -55,5 +59,16 @@ public class Sale {
         return output;
         
     }
+
+    public int getClientId() {
+        return clientId;
+    }
+
+    public int getSaleID() {
+        return saleID;
+    }
+    
+    
+    
     
 }

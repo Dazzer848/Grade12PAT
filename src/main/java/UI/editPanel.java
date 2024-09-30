@@ -202,6 +202,7 @@ public class editPanel extends javax.swing.JFrame {
         else {
             JOptionPane.showMessageDialog(this, "Failed to update part.");
         }
+        
     }//GEN-LAST:event_confirmButtonActionPerformed
     
     // The metod which fills in the data of the UI components

@@ -4,18 +4,52 @@
  */
 package UI;
 
+import Backend.Client;
+import Backend.Part;
+import Backend.Sale;
+import Backend.clientManager;
+import Backend.inventoryManager;
+import Backend.saleManager;
+import DBMS.DB;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author dazzl
  */
-// THIS AINT DONE YET BROTHER, WHAT IS THIS EVEN FOR!
 public class clientEditor extends javax.swing.JFrame {
+
+    // The global variables that are required for fulling in the data on this screen.
+    private Part part;
+    private inventoryManager manager;
 
     /**
      * Creates new form editPanel
      */
+    //Building site
     public clientEditor() {
         initComponents();
+        
+        int clientID = Integer.parseInt(JOptionPane.showInputDialog("Please enter your client number"));
+        // This method populates the UI components with the data from the class
+        populateFields(clientID);
+        populateSalesTable(clientID);
+        
+        // Disposes the screen on close but not the whole prgram
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
+        // Populates the combo box with the correct fields which can be selected for a part
+
+        
+        //Places the screen in the middle of the users display
+        setLocationRelativeTo(null);
+
     }
 
     /**
@@ -27,166 +61,194 @@ public class clientEditor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        editClientHeader = new javax.swing.JLabel();
-        enterIDTextField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        editItemHeader = new javax.swing.JLabel();
         enterNameTextField = new javax.swing.JTextField();
-        totalSpentLabel = new javax.swing.JLabel();
-        totalSpentJSpinner = new javax.swing.JSpinner();
-        loyaltyLabel = new javax.swing.JLabel();
+        priceLabel = new javax.swing.JLabel();
         confirmButton = new javax.swing.JButton();
         loyaltyStatusButton = new javax.swing.JToggleButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        purchasesDisplay = new javax.swing.JTextArea();
-        deleteSaleButton = new javax.swing.JButton();
-        updateSaleButton = new javax.swing.JButton();
-        addSaleButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        totalSpentJSpinner = new javax.swing.JSpinner();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        clientPurchasesJTable = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        editClientHeader.setFont(new java.awt.Font("Candara Light", 0, 48)); // NOI18N
-        editClientHeader.setText("EDIT ClIENT");
-
-        enterIDTextField.setText("Enter your ID...");
-        enterIDTextField.setToolTipText("");
+        editItemHeader.setFont(new java.awt.Font("Candara Light", 0, 48)); // NOI18N
+        editItemHeader.setText("EDIT CLIENT");
 
         enterNameTextField.setText("Enter your name...");
+        enterNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enterNameTextFieldActionPerformed(evt);
+            }
+        });
 
-        totalSpentLabel.setText("Total Spent");
-
-        loyaltyLabel.setText("Loyalty");
+        priceLabel.setText("LOYALTY");
 
         confirmButton.setText("Confirm");
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmButtonActionPerformed(evt);
+            }
+        });
 
         loyaltyStatusButton.setText("LOYALTY");
 
-        purchasesDisplay.setColumns(20);
-        purchasesDisplay.setRows(5);
-        purchasesDisplay.setText("PURCHASES\n");
-        jScrollPane1.setViewportView(purchasesDisplay);
+        jLabel1.setText("Total Spent:");
 
-        deleteSaleButton.setText("DELETE");
-
-        updateSaleButton.setText("UPDATE");
-
-        addSaleButton.setText("ADD");
+        clientPurchasesJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(clientPurchasesJTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(83, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(editClientHeader))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(enterIDTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                            .addComponent(enterNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(updateSaleButton)
-                                    .addComponent(addSaleButton)
-                                    .addComponent(deleteSaleButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(enterNameTextField)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(loyaltyStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(loyaltyLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
+                                    .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(loyaltyStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(totalSpentLabel)
-                                    .addComponent(totalSpentJSpinner))))))
-                .addContainerGap(112, Short.MAX_VALUE))
+                                    .addComponent(jLabel1)
+                                    .addComponent(totalSpentJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(69, 69, 69))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(editItemHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(61, 61, 61))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addComponent(editClientHeader)
-                .addGap(26, 26, 26)
-                .addComponent(enterIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(enterNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loyaltyLabel)
-                    .addComponent(totalSpentLabel))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(loyaltyStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(totalSpentJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(deleteSaleButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(updateSaleButton)
-                        .addGap(52, 52, 52)
-                        .addComponent(addSaleButton)))
-                .addGap(38, 38, 38)
+                .addComponent(editItemHeader)
+                .addGap(30, 30, 30)
+                .addComponent(enterNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceLabel)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loyaltyStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalSpentJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addGap(39, 39, 39))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(clientEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(clientEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(clientEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(clientEditor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    // Enetering the name of the part
+    private void enterNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterNameTextFieldActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new clientEditor().setVisible(true);
+    }//GEN-LAST:event_enterNameTextFieldActionPerformed
+
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
+
+    }//GEN-LAST:event_confirmButtonActionPerformed
+    
+    // The metod which fills in the data of the UI components
+        private void populateFields(int inCID) {
+            clientManager cManager = new clientManager();
+            if(cManager.findClientById(inCID) == null){
+                JOptionPane.showMessageDialog(null, "Client not found", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        });
+            else{
+                Client c = cManager.findClientById(inCID);
+                enterNameTextField.setText(c.getName());
+                
+                if(c.isLoyalty() == true){
+                    loyaltyStatusButton.setSelected(true);
+                }
+                else{
+                    loyaltyStatusButton.setSelected(false);
+                }
+                
+                totalSpentJSpinner.setValue(c.getTotalSpent());
+                
+                    
+                
+
+            }
+        }
+            
+ private void populateSalesTable(int clientID) {
+
+    saleManager manager = new saleManager();
+
+    DefaultTableModel tableModel = new DefaultTableModel();
+
+
+    tableModel.addColumn("Sale ID");
+    tableModel.addColumn("Total");
+
+    ArrayList<Sale> salesMadeByClient = manager.findSalesById(clientID);
+
+    for (Sale sale : salesMadeByClient) {
+        Object[] rowData = {
+            sale.getSaleID(),   
+            sale.getTotal()    
+        };
+        
+
+        tableModel.addRow(rowData);
     }
 
+    clientPurchasesJTable.setModel(tableModel);
+}
+
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addSaleButton;
+    private javax.swing.JTable clientPurchasesJTable;
     private javax.swing.JButton confirmButton;
-    private javax.swing.JButton deleteSaleButton;
-    private javax.swing.JLabel editClientHeader;
-    private javax.swing.JTextField enterIDTextField;
+    private javax.swing.JLabel editItemHeader;
     private javax.swing.JTextField enterNameTextField;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel loyaltyLabel;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton loyaltyStatusButton;
-    private javax.swing.JTextArea purchasesDisplay;
+    private javax.swing.JLabel priceLabel;
     private javax.swing.JSpinner totalSpentJSpinner;
-    private javax.swing.JLabel totalSpentLabel;
-    private javax.swing.JButton updateSaleButton;
     // End of variables declaration//GEN-END:variables
 }
