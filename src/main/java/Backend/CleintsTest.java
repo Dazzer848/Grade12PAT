@@ -6,12 +6,13 @@ package Backend;
 
 /**
  *
- * @author dazzl
+ * @author darre
  */
-public class partsManager {
-    
-    
-    public partsManager(){
-        
+public class CleintsTest {
+    public static void main(String[] args) {
+        clientManager manaer = new clientManager();
+        System.out.println("test");
     }
+            
+    
 }
