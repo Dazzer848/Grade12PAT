@@ -28,9 +28,9 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="686" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Component id="inventoryMainHeader" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="382" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="526" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,7 +72,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="AddButton" max="32767" attributes="0"/>
-                      <Component id="removeOneButton" max="32767" attributes="0"/>
+                      <Component id="removeOneButton" pref="234" max="32767" attributes="0"/>
                       <Component id="editButton" alignment="0" max="32767" attributes="0"/>
                       <Component id="deleteButton" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -83,14 +83,14 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
-                  <Component id="AddButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="107" max="-2" attributes="0"/>
-                  <Component id="removeOneButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
-                  <Component id="editButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                  <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                  <Component id="AddButton" min="-2" pref="71" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                  <Component id="removeOneButton" min="-2" pref="66" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                  <Component id="editButton" min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                  <Component id="deleteButton" min="-2" pref="64" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="0" attributes="0">
@@ -131,6 +131,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="AddButton">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Corbel" size="18" style="1"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="ADD"/>
           </Properties>
           <Events>
@@ -139,7 +142,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="removeOneButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Remove 1"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Corbel" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="REMOVE"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="removeOneButtonActionPerformed"/>
@@ -147,7 +153,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="editButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Edit Part"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Corbel" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="EDIT PART"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editButtonActionPerformed"/>
@@ -155,7 +164,10 @@
         </Component>
         <Component class="javax.swing.JButton" name="deleteButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Delete"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Corbel" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="DELETE"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>

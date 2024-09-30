@@ -32,9 +32,11 @@ public class dashboard extends javax.swing.JFrame {
         inventoryButton = new javax.swing.JButton();
         saleCreatorButton = new javax.swing.JButton();
         clientEditorButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        inventoryButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         inventoryButton.setText("INVENTORY");
         inventoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -42,6 +44,7 @@ public class dashboard extends javax.swing.JFrame {
             }
         });
 
+        saleCreatorButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         saleCreatorButton.setText("SALE CREATOR");
         saleCreatorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,35 +52,46 @@ public class dashboard extends javax.swing.JFrame {
             }
         });
 
-        clientEditorButton.setText("Client Editor");
+        clientEditorButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        clientEditorButton.setText("CLIENT EDITOR");
         clientEditorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientEditorButtonActionPerformed(evt);
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Candara Light", 1, 48)); // NOI18N
+        jLabel1.setText("INVENTORY MANAGEMENT");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(inventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(saleCreatorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-                    .addComponent(clientEditorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(inventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saleCreatorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                            .addComponent(clientEditorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(260, 260, 260))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(108, 108, 108))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(214, Short.MAX_VALUE)
-                .addComponent(inventoryButton)
-                .addGap(71, 71, 71)
-                .addComponent(saleCreatorButton)
-                .addGap(63, 63, 63)
-                .addComponent(clientEditorButton)
-                .addGap(103, 103, 103))
+                .addGap(22, 22, 22)
+                .addComponent(jLabel1)
+                .addGap(44, 44, 44)
+                .addComponent(inventoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(saleCreatorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(clientEditorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();
@@ -138,6 +152,7 @@ public class dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clientEditorButton;
     private javax.swing.JButton inventoryButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton saleCreatorButton;
     // End of variables declaration//GEN-END:variables
 }
