@@ -196,6 +196,7 @@ public class editPanel extends javax.swing.JFrame {
             this.dispose();
             
         }
+        
         //Reports an error
         else {
             JOptionPane.showMessageDialog(this, "Failed to update part.");

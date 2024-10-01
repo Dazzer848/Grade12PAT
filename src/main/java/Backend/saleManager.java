@@ -140,6 +140,7 @@ public class saleManager {
                 //Get's the current amount of part's in the inventory
                 ResultSet currentQuantityTable = DB.query("SELECT Quantity FROM sys.inventory WHERE part_ID = " + p.getPartID() + ";");
                 currentQuantityTable.next();
+                
                 // Stores the current amount of this specific part in the inventory
                 int currentQuantity = currentQuantityTable.getInt(1);
 
@@ -162,7 +163,8 @@ public class saleManager {
 
             //Creating   the next saleID to be used as a unique identifier for this transaction
             int newSaleID = highestSaleID + 1;
-
+            
+            //Makes the total variable
             int total = 0;
 
             // Loops through the parts in the sale and buidls the query for the object
@@ -193,7 +195,7 @@ public class saleManager {
         }
 
     }
-    public ArrayList<Sale> findSalesById(int clientID){
+    public ArrayList<Sale> findSalesByClientID(int clientID){
         
         ArrayList<Sale> salesFromClient = new ArrayList<Sale>();
         int test = size;
@@ -209,4 +211,14 @@ public class saleManager {
         }
         return salesFromClient; 
     }
+    
+    public Sale findSaleBySaleID(int inSID){
+        for(int i = 0; i < size; i++){
+            if(salesArr[i].getSaleID() == inSID){
+                return salesArr[i];
+            }
+            
+    }
+        return null;
+}
 }

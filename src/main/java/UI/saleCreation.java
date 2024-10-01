@@ -4,7 +4,9 @@
  */
 package UI;
 
+import Backend.Client;
 import Backend.Part;
+import Backend.clientManager;
 import Backend.inventoryManager;
 import Backend.saleManager;
 import DBMS.DB;
@@ -31,6 +33,7 @@ public class saleCreation extends javax.swing.JFrame {
     
     //Globl variabls for the class
     private inventoryManager manager;
+    private clientManager cManager;
     
     //Fiters for the inventory
     private String currentCategoryFilter = "";
@@ -47,6 +50,10 @@ public class saleCreation extends javax.swing.JFrame {
         initComponents();
         //Creates the inventory manager
         this.manager = new inventoryManager();
+        this.cManager = new clientManager();
+        
+        // Disposes the screen on close but not the whole prgram
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
         //Populates the inventory table with no filters
         populateTable("", "", "");
@@ -863,6 +870,11 @@ public class saleCreation extends javax.swing.JFrame {
         saleManager saleMgr = new saleManager();
         //Creates the sale using the inputted details
         saleMgr.createSale(new ArrayList<>(cartItems), totalAmount, clientID);
+        
+        
+        
+        Client c = cManager.findClientById(clientID);
+        c.updateTotalSpent(totalAmount);
         
         //Clears the users cart
         cartItems.clear();

@@ -44,13 +44,10 @@ public class clientManager {
                 boolean loyalty = clients.getBoolean(3);
                 int totalSpent = clients.getInt(4);
                 
-                //if(totalSpent > 50000){
-                //    DB.update("UPDATE sys.clients SET Loyalty = 1 WHERE (ClientID = " + clientID + ");");
-                //}
-                //else{
-                  //  DB.update("UPDATE sys.clients SET Loyalty = 0 WHERE (ClientID = " + clientID + ");");
-                //}
-                    
+                if(totalSpent > 50000){
+                    DB.update("UPDATE sys.clients SET Loyalty = 1 WHERE (ClientID = " + clientID + ");");
+                }
+               
                 clients.next();
                 
                 Client c = new Client(clientName, clientID, loyalty, totalSpent);
@@ -75,5 +72,4 @@ public class clientManager {
         }
         return null;
     }
-
 }

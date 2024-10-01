@@ -46,6 +46,9 @@ public class inventory extends javax.swing.JFrame {
         // mKAES the inventory manager object
         this.manager = new inventoryManager();
         
+         // Disposes the screen on close but not the whole prgram
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        
         //Populates the table for the first time with no filters
         populateTable("", "", "");
         setLocationRelativeTo(null); 

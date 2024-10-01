@@ -4,6 +4,11 @@
  */
 package Backend;
 
+import DBMS.DB;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author darre
@@ -22,6 +27,7 @@ public class Client {
     }
 
     public int getTotalSpent() {
+        int t = totalSpent;
         return totalSpent;
     }
 
@@ -36,6 +42,20 @@ public class Client {
     public boolean isLoyalty() {
         return loyalty;
     }
+
+    public void updateTotalSpent(int inSpent) {
+        this.totalSpent = totalSpent + inSpent;
+    }
+
+    public void setLoyalty(boolean inLoyalty) {
+        try {
+            this.loyalty = loyalty;
+            DB.update("UPDATE sys.clients SET Loyalty = " + inLoyalty + " WHERE (ClientID = " + clientID + ");");
+        } catch (SQLException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
     
     
