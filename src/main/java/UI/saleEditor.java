@@ -65,9 +65,7 @@ public class saleEditor extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         editItemHeader = new javax.swing.JLabel();
         saleIDTextField = new javax.swing.JTextField();
-        priceLabel = new javax.swing.JLabel();
         confirmButton = new javax.swing.JButton();
-        loyaltyStatusButton = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         totalSpentJSpinner = new javax.swing.JSpinner();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -102,22 +100,11 @@ public class saleEditor extends javax.swing.JFrame {
             }
         });
 
-        priceLabel.setFont(new java.awt.Font("Candara Light", 1, 24)); // NOI18N
-        priceLabel.setText("LOYALTY");
-
         confirmButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmButtonActionPerformed(evt);
-            }
-        });
-
-        loyaltyStatusButton.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
-        loyaltyStatusButton.setText("LOYALTY");
-        loyaltyStatusButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loyaltyStatusButtonActionPerformed(evt);
             }
         });
 
@@ -137,6 +124,7 @@ public class saleEditor extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(saleContentsTABLE);
 
+        clientNameDisplayField.setEditable(false);
         clientNameDisplayField.setText("Enter your client ID");
 
         jLabel2.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
@@ -149,6 +137,16 @@ public class saleEditor extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 52, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clientNameDisplayField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(saleIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(114, 114, 114))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -161,27 +159,12 @@ public class saleEditor extends javax.swing.JFrame {
                         .addGap(122, 122, 122)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(loyaltyStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                                .addComponent(totalSpentJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))))
+                        .addGap(226, 226, 226)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(totalSpentJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 52, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clientNameDisplayField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saleIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(114, 114, 114))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,19 +179,14 @@ public class saleEditor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(clientNameDisplayField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(priceLabel)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(loyaltyStatusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(totalSpentJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
+                .addGap(29, 29, 29)
+                .addComponent(totalSpentJSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44))
         );
 
@@ -223,10 +201,6 @@ public class saleEditor extends javax.swing.JFrame {
     private void saleIDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleIDTextFieldActionPerformed
 
     }//GEN-LAST:event_saleIDTextFieldActionPerformed
-
-    private void loyaltyStatusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loyaltyStatusButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_loyaltyStatusButtonActionPerformed
     
     // The metod which fills in the data of the UI components
         private void populateFields(int inSaleID) {
@@ -238,13 +212,6 @@ public class saleEditor extends javax.swing.JFrame {
             saleIDTextField.setText(s.getSaleID() + "");
             clientNameDisplayField.setText(c.getName()+ "");
             
-            if(c.isLoyalty() == true){
-                loyaltyStatusButton.setSelected(true);
-                loyaltyStatusButton.setBackground(Color.green);
-            }
-            else{
-                loyaltyStatusButton.setBackground(Color.red);
-            }
             
             totalSpentJSpinner.setValue(s.getTotal());
             
@@ -300,8 +267,6 @@ public class saleEditor extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton loyaltyStatusButton;
-    private javax.swing.JLabel priceLabel;
     private javax.swing.JTable saleContentsTABLE;
     private javax.swing.JTextField saleIDTextField;
     private javax.swing.JSpinner totalSpentJSpinner;

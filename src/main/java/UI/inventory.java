@@ -834,6 +834,7 @@ public class inventory extends javax.swing.JFrame {
     } else {
         JOptionPane.showMessageDialog(this, "Part not found.");
     }   
+    
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

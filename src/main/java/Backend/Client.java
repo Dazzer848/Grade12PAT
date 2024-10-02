@@ -48,13 +48,9 @@ public class Client {
     }
 
     public void setLoyalty(boolean inLoyalty) {
-        try {
-            this.loyalty = loyalty;
-            DB.update("UPDATE sys.clients SET Loyalty = " + inLoyalty + " WHERE (ClientID = " + clientID + ");");
-        } catch (SQLException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.loyalty = loyalty;
     }
+    
     
     
     

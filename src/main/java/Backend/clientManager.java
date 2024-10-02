@@ -44,7 +44,7 @@ public class clientManager {
                 boolean loyalty = clients.getBoolean(3);
                 int totalSpent = clients.getInt(4);
                 
-                if(totalSpent > 50000){
+                if(totalSpent > 50000 || loyalty == true){
                     DB.update("UPDATE sys.clients SET Loyalty = 1 WHERE (ClientID = " + clientID + ");");
                 }
                
@@ -71,5 +71,16 @@ public class clientManager {
             }
         }
         return null;
+    }
+    
+   public void setLoyalty(boolean inLoyalty, int inCID) {
+        try {
+            Client c = findClientById(inCID);
+            c.setLoyalty(inLoyalty);
+            
+            DB.update("UPDATE sys.clients SET Loyalty = " + inLoyalty + " WHERE (ClientID = " + inCID + ");");
+        } catch (SQLException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
