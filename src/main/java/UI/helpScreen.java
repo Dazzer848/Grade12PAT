@@ -55,7 +55,9 @@ public class helpScreen extends javax.swing.JFrame {
         linkDisplayLabel.setFont(new java.awt.Font("Corbel", 1, 36)); // NOI18N
         linkDisplayLabel.setText("LINK:");
 
+        closeButton.setBackground(new java.awt.Color(202, 222, 239));
         closeButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        closeButton.setForeground(new java.awt.Color(7, 132, 181));
         closeButton.setText("CLOSE");
         closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -91,7 +91,9 @@ public class PartEditPanel extends javax.swing.JFrame {
         priceLabel.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         priceLabel.setText("Price");
 
+        confirmButton.setBackground(new java.awt.Color(202, 222, 239));
         confirmButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        confirmButton.setForeground(new java.awt.Color(7, 132, 182));
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

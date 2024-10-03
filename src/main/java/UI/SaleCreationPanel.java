@@ -106,7 +106,7 @@ public class SaleCreationPanel extends javax.swing.JFrame {
         inventoryMainHeader.setFont(new java.awt.Font("Candara Light", 1, 36)); // NOI18N
         inventoryMainHeader.setText("INVENTORY");
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(155, 212, 228));
 
         inventoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,7 +121,9 @@ public class SaleCreationPanel extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(inventoryTable);
 
+        addPartButton.setBackground(new java.awt.Color(202, 222, 239));
         addPartButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        addPartButton.setForeground(new java.awt.Color(7, 132, 181));
         addPartButton.setText("ADD PART");
         addPartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,11 +131,14 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
-        inventoryFiltersPanel.setBackground(new java.awt.Color(0, 0, 0));
+        inventoryFiltersPanel.setBackground(new java.awt.Color(155, 212, 228));
 
         partTagsLabel.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        partTagsLabel.setForeground(new java.awt.Color(7, 132, 181));
         partTagsLabel.setText("PART TAGS");
 
+        engineTagButton.setBackground(new java.awt.Color(202, 222, 239));
+        engineTagButton.setForeground(new java.awt.Color(7, 132, 181));
         engineTagButton.setText("ENGINE");
         engineTagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +146,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        fuselageTagButton.setBackground(new java.awt.Color(202, 222, 239));
+        fuselageTagButton.setForeground(new java.awt.Color(7, 132, 181));
         fuselageTagButton.setText("FUSELAGE");
         fuselageTagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,6 +155,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        wingsTagButton.setBackground(new java.awt.Color(202, 222, 239));
+        wingsTagButton.setForeground(new java.awt.Color(7, 132, 181));
         wingsTagButton.setText("WINGS");
         wingsTagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +164,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        paintsTagButton.setBackground(new java.awt.Color(202, 222, 239));
+        paintsTagButton.setForeground(new java.awt.Color(7, 132, 181));
         paintsTagButton.setText("PAINTS");
         paintsTagButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,8 +174,11 @@ public class SaleCreationPanel extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(7, 132, 181));
         jLabel2.setText("FILTER");
 
+        lowQuantityFilterButton.setBackground(new java.awt.Color(202, 222, 239));
+        lowQuantityFilterButton.setForeground(new java.awt.Color(7, 132, 181));
         lowQuantityFilterButton.setText("LOW QTY");
         lowQuantityFilterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,6 +186,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        highQuantityFilterButton.setBackground(new java.awt.Color(202, 222, 239));
+        highQuantityFilterButton.setForeground(new java.awt.Color(7, 132, 181));
         highQuantityFilterButton.setText("HIGH QTY");
         highQuantityFilterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +195,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        toReplenishFilterButton.setBackground(new java.awt.Color(202, 222, 239));
+        toReplenishFilterButton.setForeground(new java.awt.Color(7, 132, 181));
         toReplenishFilterButton.setText("TO REPLENISH");
         toReplenishFilterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,8 +205,11 @@ public class SaleCreationPanel extends javax.swing.JFrame {
         });
 
         orderByLabel.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
+        orderByLabel.setForeground(new java.awt.Color(7, 132, 181));
         orderByLabel.setText("ORDER BY");
 
+        sortAlphaASCOrderByButton.setBackground(new java.awt.Color(202, 222, 239));
+        sortAlphaASCOrderByButton.setForeground(new java.awt.Color(7, 132, 181));
         sortAlphaASCOrderByButton.setText("NAME ( A- Z )");
         sortAlphaASCOrderByButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -196,6 +217,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        priceASCOrderButton.setBackground(new java.awt.Color(202, 222, 239));
+        priceASCOrderButton.setForeground(new java.awt.Color(7, 132, 181));
         priceASCOrderButton.setText("PRICE ASC");
         priceASCOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +226,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        sortAlphaDESCOrderButton.setBackground(new java.awt.Color(202, 222, 239));
+        sortAlphaDESCOrderButton.setForeground(new java.awt.Color(7, 132, 181));
         sortAlphaDESCOrderButton.setText("NAME ( Z- A )");
         sortAlphaDESCOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +235,8 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        priceDESCOrderButton.setBackground(new java.awt.Color(202, 222, 239));
+        priceDESCOrderButton.setForeground(new java.awt.Color(7, 132, 181));
         priceDESCOrderButton.setText("PRICE DESC");
         priceDESCOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,7 +361,7 @@ public class SaleCreationPanel extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setBackground(new java.awt.Color(155, 212, 228));
 
         cartTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -349,7 +376,9 @@ public class SaleCreationPanel extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(cartTable);
 
+        checkoutButton.setBackground(new java.awt.Color(202, 222, 239));
         checkoutButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        checkoutButton.setForeground(new java.awt.Color(7, 132, 181));
         checkoutButton.setText("CHECKOUT");
         checkoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,7 +386,9 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        removePartButton.setBackground(new java.awt.Color(202, 222, 239));
         removePartButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        removePartButton.setForeground(new java.awt.Color(7, 132, 181));
         removePartButton.setText("REMOVE PART");
         removePartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,7 +396,9 @@ public class SaleCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        clearOrderButton.setBackground(new java.awt.Color(202, 222, 239));
         clearOrderButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        clearOrderButton.setForeground(new java.awt.Color(7, 132, 181));
         clearOrderButton.setText("CLEAR ORDER");
         clearOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

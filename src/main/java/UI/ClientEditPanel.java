@@ -100,6 +100,7 @@ public class ClientEditPanel extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(7, 132, 181));
 
         editItemHeader.setFont(new java.awt.Font("Candara Light", 0, 48)); // NOI18N
         editItemHeader.setText("VIEW CLIENT");
@@ -114,7 +115,9 @@ public class ClientEditPanel extends javax.swing.JFrame {
         priceLabel.setFont(new java.awt.Font("Candara Light", 1, 24)); // NOI18N
         priceLabel.setText("LOYALTY");
 
+        confirmButton.setBackground(new java.awt.Color(202, 222, 239));
         confirmButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        confirmButton.setForeground(new java.awt.Color(7, 132, 181));
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +149,9 @@ public class ClientEditPanel extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(clientPurchasesJTable);
 
+        saleContentsButton.setBackground(new java.awt.Color(202, 222, 239));
         saleContentsButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        saleContentsButton.setForeground(new java.awt.Color(7, 132, 181));
         saleContentsButton.setText("VIEW");
         saleContentsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,11 +223,11 @@ public class ClientEditPanel extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(saleContentsButton)))
-                .addGap(47, 47, 47)
+                        .addGap(118, 118, 118)
+                        .addComponent(saleContentsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52))
+                .addGap(63, 63, 63))
         );
 
         pack();

@@ -100,7 +100,9 @@ public class SaleDetailsPanel extends javax.swing.JFrame {
             }
         });
 
+        confirmButton.setBackground(new java.awt.Color(202, 222, 239));
         confirmButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        confirmButton.setForeground(new java.awt.Color(7, 132, 181));
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

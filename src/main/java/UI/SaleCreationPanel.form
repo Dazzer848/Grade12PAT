@@ -76,7 +76,7 @@
     <Container class="javax.swing.JPanel" name="jPanel2">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
+          <Color blue="e4" green="d4" red="9b" type="rgb"/>
         </Property>
       </Properties>
 
@@ -138,8 +138,14 @@
         </Container>
         <Component class="javax.swing.JButton" name="addPartButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ef" green="de" red="ca" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Corbel" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="b5" green="84" red="7" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="ADD PART"/>
           </Properties>
@@ -150,7 +156,7 @@
         <Container class="javax.swing.JPanel" name="inventoryFiltersPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
+              <Color blue="e4" green="d4" red="9b" type="rgb"/>
             </Property>
           </Properties>
 
@@ -274,11 +280,20 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri Light" size="18" style="1"/>
                 </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="PART TAGS"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="engineTagButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="ENGINE"/>
               </Properties>
               <Events>
@@ -287,6 +302,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="fuselageTagButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="FUSELAGE"/>
               </Properties>
               <Events>
@@ -295,6 +316,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="wingsTagButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="WINGS"/>
               </Properties>
               <Events>
@@ -303,6 +330,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="paintsTagButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="PAINTS"/>
               </Properties>
               <Events>
@@ -316,11 +349,20 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri Light" size="18" style="1"/>
                 </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="FILTER"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="lowQuantityFilterButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="LOW QTY"/>
               </Properties>
               <Events>
@@ -329,6 +371,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="highQuantityFilterButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="HIGH QTY"/>
               </Properties>
               <Events>
@@ -337,6 +385,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="toReplenishFilterButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="TO REPLENISH"/>
               </Properties>
               <Events>
@@ -350,11 +404,20 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri Light" size="18" style="1"/>
                 </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="ORDER BY"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="sortAlphaASCOrderByButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="NAME ( A- Z )"/>
               </Properties>
               <Events>
@@ -363,6 +426,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="priceASCOrderButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="PRICE ASC"/>
               </Properties>
               <Events>
@@ -371,6 +440,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="sortAlphaDESCOrderButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="NAME ( Z- A )"/>
               </Properties>
               <Events>
@@ -379,6 +454,12 @@
             </Component>
             <Component class="javax.swing.JToggleButton" name="priceDESCOrderButton">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ef" green="de" red="ca" type="rgb"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="b5" green="84" red="7" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="PRICE DESC"/>
               </Properties>
               <Events>
@@ -394,7 +475,7 @@
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
+          <Color blue="e4" green="d4" red="9b" type="rgb"/>
         </Property>
       </Properties>
 
@@ -456,8 +537,14 @@
         </Container>
         <Component class="javax.swing.JButton" name="checkoutButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ef" green="de" red="ca" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Corbel" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="b5" green="84" red="7" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CHECKOUT"/>
           </Properties>
@@ -467,8 +554,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="removePartButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ef" green="de" red="ca" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Corbel" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="b5" green="84" red="7" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="REMOVE PART"/>
           </Properties>
@@ -478,8 +571,14 @@
         </Component>
         <Component class="javax.swing.JButton" name="clearOrderButton">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ef" green="de" red="ca" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Corbel" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="b5" green="84" red="7" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="CLEAR ORDER"/>
           </Properties>

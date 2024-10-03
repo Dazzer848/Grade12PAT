@@ -46,8 +46,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
         partCreatorButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(7, 132, 181));
 
+        inventoryButton.setBackground(new java.awt.Color(202, 222, 239));
         inventoryButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        inventoryButton.setForeground(new java.awt.Color(7, 132, 181));
         inventoryButton.setText("INVENTORY");
         inventoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,7 +58,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
 
+        saleCreatorButton.setBackground(new java.awt.Color(202, 222, 239));
         saleCreatorButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        saleCreatorButton.setForeground(new java.awt.Color(7, 132, 181));
         saleCreatorButton.setText("SALE CREATOR");
         saleCreatorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -63,8 +68,11 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
 
+        clientEditorButton.setBackground(new java.awt.Color(202, 222, 239));
         clientEditorButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        clientEditorButton.setForeground(new java.awt.Color(7, 132, 181));
         clientEditorButton.setText("CLIENT EDITOR");
+        clientEditorButton.setToolTipText("");
         clientEditorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientEditorButtonActionPerformed(evt);
@@ -74,7 +82,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Candara Light", 1, 48)); // NOI18N
         jLabel1.setText("INVENTORY MANAGEMENT");
 
+        helpScreenButton.setBackground(new java.awt.Color(202, 222, 239));
         helpScreenButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        helpScreenButton.setForeground(new java.awt.Color(7, 132, 181));
         helpScreenButton.setText("HELP");
         helpScreenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,7 +92,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
             }
         });
 
+        partCreatorButton.setBackground(new java.awt.Color(202, 222, 239));
         partCreatorButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        partCreatorButton.setForeground(new java.awt.Color(7, 132, 181));
         partCreatorButton.setText("PART CREATOR");
         partCreatorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
