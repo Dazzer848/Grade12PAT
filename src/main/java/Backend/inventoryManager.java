@@ -207,10 +207,11 @@ public class inventoryManager {
 
         } 
         
-        //THIS FUNCTION IS FLAWED, DOES NOT UPDATE THE TWO TABLES. 
         //If the part does not exist, then make a new part.
         else if (part.getQuantity() > 0) {
             // Part does not exist in inventory, insert it
+            
+            DB.update("INSERT INTO sys.parts (part_ID, part_name, price, category) VALUES ("+part.getPartID() + ",\"" + part.getName() + "\"," + part.getPrice() + ",\"" + part.getCatogory() + "\");");
             DB.update( "INSERT INTO sys.inventory (part_ID, quantity) VALUES (" + part.getPartID() + ", " + part.getQuantity() + ")");
         }
         

@@ -17,26 +17,21 @@ import javax.swing.JOptionPane;
  *
  * @author dazzl
  */
-public class editPanel extends javax.swing.JFrame {
+public class PartCreationPanel extends javax.swing.JFrame {
 
     // The global variables that are required for fulling in the data on this screen.
-    private Part part;
     private inventoryManager manager;
 
     /**
      * Creates new form editPanel
      */
     //Building site
-    public editPanel(Part selectedPart) {
+    public PartCreationPanel() {
         initComponents();
-        // Set's the global variable ( I.e the part data we need ) to the class specific part
-        this.part = selectedPart;
+
         
         //Makes an inventory manager
         this.manager = new inventoryManager();
-        
-        // This method populates the UI components with the data from the class
-        populateFields();
         
         // Disposes the screen on close but not the whole prgram
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -59,7 +54,6 @@ public class editPanel extends javax.swing.JFrame {
     private void initComponents() {
 
         editItemHeader = new javax.swing.JLabel();
-        enterItemIDTextField = new javax.swing.JTextField();
         enterPartNameTextField = new javax.swing.JTextField();
         quantitiyLable = new javax.swing.JLabel();
         itemQuantitySpinner = new javax.swing.JSpinner();
@@ -72,9 +66,6 @@ public class editPanel extends javax.swing.JFrame {
 
         editItemHeader.setFont(new java.awt.Font("Candara Light", 0, 48)); // NOI18N
         editItemHeader.setText("EDIT ITEM");
-
-        enterItemIDTextField.setText("Enter your ID...");
-        enterItemIDTextField.setToolTipText("");
 
         enterPartNameTextField.setText("Enter your name...");
         enterPartNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +103,6 @@ public class editPanel extends javax.swing.JFrame {
                         .addGap(102, 102, 102)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(enterItemIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(enterPartNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(catagorySelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -133,21 +123,19 @@ public class editPanel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(editItemHeader)
-                .addGap(26, 26, 26)
-                .addComponent(enterItemIDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(32, 32, 32)
                 .addComponent(enterPartNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(33, 33, 33)
                 .addComponent(catagorySelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(priceLabel)
+                    .addComponent(quantitiyLable))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantitiyLable)
-                    .addComponent(priceLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemPriceSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(itemQuantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(itemQuantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(itemPriceSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
@@ -161,76 +149,70 @@ public class editPanel extends javax.swing.JFrame {
     }//GEN-LAST:event_enterPartNameTextFieldActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        //Validate and approve the data
-        
-        //Gets the new name of the part as entered
-        String partName = enterPartNameTextField.getText();
-        
-        //Get's the catogory that the user selected
-        String category = catagorySelectionComboBox.getSelectedItem().toString();
-        
-        //Get's the price that the user entered
-        int price = (int) itemPriceSpinner.getValue();
-        
-        // Get's the quantity entered
-        int quantity = (int) itemQuantitySpinner.getValue();
-
-        //Validation
-        if (partName.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Part name cannot be empty.");
-            return;
-        }
-
-        //Update the part object to relfect the changes
-        part.setName(partName);
-        part.setCatogory(category);
-        part.setPrice(price);
-        part.setQuantity(quantity);
-
-        // Update the database
-        boolean success = manager.updatePartDetails(part);
-
-        //Ensures the success of the operation
-        if (success) {
-            JOptionPane.showMessageDialog(this, "Part updated successfully.");
-            this.dispose();
+        try {
+            //Validate and approve the data
+          
+            //Gets the new name of the part as entered
+            String partName = enterPartNameTextField.getText();
             
-        }
-        
-        //Reports an error
-        else {
-            JOptionPane.showMessageDialog(this, "Failed to update part.");
+            //Get's the catogory that the user selected
+            String category = catagorySelectionComboBox.getSelectedItem().toString();
+            
+            //Get's the price that the user entered
+            int price = (int) itemPriceSpinner.getValue();
+            
+            // Get's the quantity entered
+            int quantity = (int) itemQuantitySpinner.getValue();
+            
+            //Validation
+            if (partName.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Part name cannot be empty.");
+                return;
+            }
+            
+            //Price Validation
+            if (price <= 0) {
+                JOptionPane.showMessageDialog(this, "Price must be greater than zero.");
+                return;
+            }
+            
+            // Quantity Validation
+            if (quantity <= 0) {
+                JOptionPane.showMessageDialog(this, "Quantity must be greater than zero.");
+                return;
+            }
+            
+            ResultSet highestPartIDTable = DB.query("SELECT part_ID FROM sys.inventory ORDER BY part_ID DESC LIMIT 1 ;");
+            highestPartIDTable.next();
+            int highestPartID = highestPartIDTable.getInt(1) + 1;
+            //Update the part object to relfect the changes
+            Part newPart = new Part(highestPartID, partName, price, category, quantity);
+            // Update the database
+            boolean success = manager.updatePartDetails(newPart);
+            
+            //Ensures the success of the operation
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Part Created successfully.");
+                this.dispose();
+                
+            }
+            
+            //Reports an error
+            else {
+                JOptionPane.showMessageDialog(this, "Failed to Create part.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PartCreationPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_confirmButtonActionPerformed
     
-    // The metod which fills in the data of the UI components
-    private void populateFields() {
-        //Makes Enters the item's ID
-        enterItemIDTextField.setText(String.valueOf(part.getPartID()));
-        
-        //Ensures that the item ID cannot be edited
-        enterItemIDTextField.setEditable(false);
-        
-        //Fills in the name of the part
-        enterPartNameTextField.setText(part.getName());
-
-        // Set category in JComboBox
-        catagorySelectionComboBox.setSelectedItem(part.getCatogory());
-
-        // Set price in JSpinner
-        itemPriceSpinner.setValue(part.getPrice());
-
-        // Set quantity in JSpinner
-        itemQuantitySpinner.setValue(part.getQuantity());
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> catagorySelectionComboBox;
     private javax.swing.JButton confirmButton;
     private javax.swing.JLabel editItemHeader;
-    private javax.swing.JTextField enterItemIDTextField;
     private javax.swing.JTextField enterPartNameTextField;
     private javax.swing.JSpinner itemPriceSpinner;
     private javax.swing.JSpinner itemQuantitySpinner;

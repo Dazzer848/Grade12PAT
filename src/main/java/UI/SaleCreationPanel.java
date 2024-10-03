@@ -4,8 +4,11 @@
  */
 package UI;
 
+import Backend.Client;
 import Backend.Part;
+import Backend.clientManager;
 import Backend.inventoryManager;
+import Backend.saleManager;
 import DBMS.DB;
 import java.util.List;
 import java.sql.ResultSet;
@@ -25,33 +28,36 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author dazzl
- * MUST FIX THE TABLE NOT UPDATING AFTER EDITING THE PART
  */
-public class inventory extends javax.swing.JFrame {
-
-    //Global variables of the program
-    private inventoryManager manager;
+public class SaleCreationPanel extends javax.swing.JFrame {
     
-    //The filters that will be used in the inventory table
+    //Globl variabls for the class
+    private inventoryManager manager;
+    private clientManager cManager;
+    
+    //Fiters for the inventory
     private String currentCategoryFilter = "";
     private String currentQuantityFilter = "";
     private String currentSortOrder = "";
+    
+    // An array list which stores the current items in the cart.
+    private ArrayList<Part> cartItems = new ArrayList<>();
 
     /**
      *
      */
-    //Bob the builder can he fix it!
-    public inventory() {
+    public SaleCreationPanel() {
         initComponents();
-        // mKAES the inventory manager object
+        //Creates the inventory manager
         this.manager = new inventoryManager();
+        this.cManager = new clientManager();
         
-         // Disposes the screen on close but not the whole prgram
+        // Disposes the screen on close but not the whole prgram
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
-        //Populates the table for the first time with no filters
+        //Populates the inventory table with no filters
         populateTable("", "", "");
-        setLocationRelativeTo(null); 
+        setLocationRelativeTo(null);
 
     }
 
@@ -68,10 +74,7 @@ public class inventory extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         inventoryTable = new javax.swing.JTable();
-        AddButton = new javax.swing.JButton();
-        removeOneButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
+        addPartButton = new javax.swing.JButton();
         inventoryFiltersPanel = new javax.swing.JPanel();
         partTagsLabel = new javax.swing.JLabel();
         engineTagButton = new javax.swing.JToggleButton();
@@ -90,12 +93,13 @@ public class inventory extends javax.swing.JFrame {
         sortAlphaDESCOrderButton = new javax.swing.JToggleButton();
         priceDESCOrderButton = new javax.swing.JToggleButton();
         jSeparator3 = new javax.swing.JSeparator();
-        advancedSearchLabel = new javax.swing.JLabel();
-        partIDLabel = new javax.swing.JLabel();
-        partIDEntryTextField = new javax.swing.JTextField();
-        partNameLabel = new javax.swing.JLabel();
-        partNameEntryField = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        cartTable = new javax.swing.JTable();
+        checkoutButton = new javax.swing.JButton();
+        removePartButton = new javax.swing.JButton();
+        clearOrderButton = new javax.swing.JButton();
+        yourCartHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -117,35 +121,11 @@ public class inventory extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(inventoryTable);
 
-        AddButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        AddButton.setText("ADD");
-        AddButton.addActionListener(new java.awt.event.ActionListener() {
+        addPartButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        addPartButton.setText("ADD PART");
+        addPartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddButtonActionPerformed(evt);
-            }
-        });
-
-        removeOneButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        removeOneButton.setText("REMOVE");
-        removeOneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeOneButtonActionPerformed(evt);
-            }
-        });
-
-        editButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        editButton.setText("EDIT PART");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
-
-        deleteButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        deleteButton.setText("DELETE");
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
+                addPartButtonActionPerformed(evt);
             }
         });
 
@@ -237,19 +217,6 @@ public class inventory extends javax.swing.JFrame {
             }
         });
 
-        advancedSearchLabel.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
-        advancedSearchLabel.setText("ADVANCED SEARCH");
-
-        partIDLabel.setText("ID:");
-
-        partIDEntryTextField.setText("jTextField1");
-
-        partNameLabel.setText("NAME:");
-
-        partNameEntryField.setText("jTextField2");
-
-        jButton1.setText("SEARCH");
-
         javax.swing.GroupLayout inventoryFiltersPanelLayout = new javax.swing.GroupLayout(inventoryFiltersPanel);
         inventoryFiltersPanel.setLayout(inventoryFiltersPanelLayout);
         inventoryFiltersPanelLayout.setHorizontalGroup(
@@ -259,10 +226,6 @@ public class inventory extends javax.swing.JFrame {
                     .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryFiltersPanelLayout.createSequentialGroup()
-                                .addComponent(partIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(partIDEntryTextField))
                             .addComponent(jSeparator3)
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)
@@ -278,7 +241,6 @@ public class inventory extends javax.swing.JFrame {
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(priceASCOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(priceDESCOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)))
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryFiltersPanelLayout.createSequentialGroup()
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(engineTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
@@ -286,16 +248,9 @@ public class inventory extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(paintsTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(fuselageTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))
-                            .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
-                                .addComponent(partNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(partNameEntryField))))
+                                    .addComponent(fuselageTagButton, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)))))
                     .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                         .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
-                                .addGap(60, 60, 60)
-                                .addComponent(advancedSearchLabel))
                             .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                                 .addGap(94, 94, 94)
                                 .addComponent(orderByLabel))
@@ -305,7 +260,7 @@ public class inventory extends javax.swing.JFrame {
                             .addGroup(inventoryFiltersPanelLayout.createSequentialGroup()
                                 .addGap(90, 90, 90)
                                 .addComponent(partTagsLabel)))
-                        .addGap(0, 57, Short.MAX_VALUE)))
+                        .addGap(0, 94, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, inventoryFiltersPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -349,19 +304,7 @@ public class inventory extends javax.swing.JFrame {
                     .addComponent(priceDESCOrderButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(advancedSearchLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(partIDLabel)
-                    .addComponent(partIDEntryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(inventoryFiltersPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(partNameEntryField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(partNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47))
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -372,47 +315,116 @@ public class inventory extends javax.swing.JFrame {
                 .addComponent(inventoryFiltersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AddButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(removeOneButton, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                    .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addPartButton, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addComponent(removeOneButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(inventoryFiltersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inventoryFiltersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(addPartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+
+        cartTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(cartTable);
+
+        checkoutButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        checkoutButton.setText("CHECKOUT");
+        checkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutButtonActionPerformed(evt);
+            }
+        });
+
+        removePartButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        removePartButton.setText("REMOVE PART");
+        removePartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removePartButtonActionPerformed(evt);
+            }
+        });
+
+        clearOrderButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        clearOrderButton.setText("CLEAR ORDER");
+        clearOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearOrderButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1002, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(checkoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                    .addComponent(removePartButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                    .addComponent(clearOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(removePartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(clearOrderButton, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(checkoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        yourCartHeader.setFont(new java.awt.Font("Candara Light", 1, 36)); // NOI18N
+        yourCartHeader.setText("YOUR CART");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(518, 518, 518)
+                                .addComponent(inventoryMainHeader))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(529, 529, 529)
+                                .addComponent(yourCartHeader)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(inventoryMainHeader)
-                .addGap(526, 526, 526))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,19 +432,21 @@ public class inventory extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(inventoryMainHeader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(yourCartHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    
-    //The filter button which ensures on Parts of the Engine catogory are shown
+
     private void engineTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_engineTagButtonActionPerformed
         if (engineTagButton.isSelected()) {
-            
-            // Deselect other category buttons
+
+            //Deselect other category buttons
             fuselageTagButton.setSelected(false);
             wingsTagButton.setSelected(false);
             paintsTagButton.setSelected(false);
@@ -443,7 +457,7 @@ public class inventory extends javax.swing.JFrame {
         } else {
             currentCategoryFilter = "";
 
-            // Reset background color to default
+            //  Reset background color to default
             engineTagButton.setBackground(Color.white);
         }
 
@@ -452,15 +466,14 @@ public class inventory extends javax.swing.JFrame {
         wingsTagButton.setBackground(Color.white);
         paintsTagButton.setBackground(Color.white);
 
-        //Re-poplates table
+        //Repoplates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
 
     }//GEN-LAST:event_engineTagButtonActionPerformed
-    
-       //The filter button which ensures on Parts of the fuselafe catogory are shown
+
     private void fuselageTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fuselageTagButtonActionPerformed
         if (fuselageTagButton.isSelected()) {
-            
+
             //Deselect other category buttons
             engineTagButton.setSelected(false);
             wingsTagButton.setSelected(false);
@@ -481,13 +494,13 @@ public class inventory extends javax.swing.JFrame {
         wingsTagButton.setBackground(Color.white);
         paintsTagButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_fuselageTagButtonActionPerformed
-   //The filter button which ensures on Parts of the wings catogory are shown
+
     private void wingsTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wingsTagButtonActionPerformed
         if (wingsTagButton.isSelected()) {
-           
+
             // Deselect other category buttons
             engineTagButton.setSelected(false);
             fuselageTagButton.setSelected(false);
@@ -508,10 +521,10 @@ public class inventory extends javax.swing.JFrame {
         fuselageTagButton.setBackground(Color.white);
         paintsTagButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_wingsTagButtonActionPerformed
-   //The filter button which ensures on Parts of the Engine catogory are shown
+
     private void paintsTagButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paintsTagButtonActionPerformed
         if (paintsTagButton.isSelected()) {
             // Deselect other category buttons
@@ -537,10 +550,10 @@ public class inventory extends javax.swing.JFrame {
         //Re-populates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_paintsTagButtonActionPerformed
-   // Filters the table so that only items with a high quanity are shown
+
     private void highQuantityFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_highQuantityFilterButtonActionPerformed
         if (highQuantityFilterButton.isSelected()) {
-            //Deselect other quantity filter buttons
+            // Deselect other quantity filter buttons
             lowQuantityFilterButton.setSelected(false);
             toReplenishFilterButton.setSelected(false);
             currentQuantityFilter = "HIGH";
@@ -558,14 +571,13 @@ public class inventory extends javax.swing.JFrame {
         lowQuantityFilterButton.setBackground(Color.white);
         toReplenishFilterButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_highQuantityFilterButtonActionPerformed
 
-       // Filters the table so that only items with a low quanity are shown
     private void lowQuantityFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowQuantityFilterButtonActionPerformed
         if (lowQuantityFilterButton.isSelected()) {
-            
+
             // Deselect other quantity filter buttons
             highQuantityFilterButton.setSelected(false);
             toReplenishFilterButton.setSelected(false);
@@ -584,10 +596,10 @@ public class inventory extends javax.swing.JFrame {
         highQuantityFilterButton.setBackground(Color.white);
         toReplenishFilterButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_lowQuantityFilterButtonActionPerformed
-    //Filters the table so that only items with nothing lefts is shown
+
     private void toReplenishFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toReplenishFilterButtonActionPerformed
         if (toReplenishFilterButton.isSelected()) {
             // Deselect other quantity filter buttons
@@ -608,14 +620,13 @@ public class inventory extends javax.swing.JFrame {
         lowQuantityFilterButton.setBackground(Color.white);
         highQuantityFilterButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_toReplenishFilterButtonActionPerformed
 
-       //Order the jTable to showcase price in ascending order
     private void priceASCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceASCOrderButtonActionPerformed
         if (priceASCOrderButton.isSelected()) {
-            
+
             // Deselect other sorting buttons
             priceDESCOrderButton.setSelected(false);
             sortAlphaASCOrderByButton.setSelected(false);
@@ -624,9 +635,7 @@ public class inventory extends javax.swing.JFrame {
 
             // Change background color to green
             priceASCOrderButton.setBackground(Color.GREEN);
-        }
-        //set's the current sort order to nothing if the button is deselected
-        else {
+        } else {
             currentSortOrder = "";
 
             // Reset background color to default
@@ -638,15 +647,14 @@ public class inventory extends javax.swing.JFrame {
         sortAlphaASCOrderByButton.setBackground(Color.white);
         sortAlphaDESCOrderButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_priceASCOrderButtonActionPerformed
 
-    //Set's the JTable to display the obkects in Descing order
     private void priceDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceDESCOrderButtonActionPerformed
         if (priceDESCOrderButton.isSelected()) {
-            
-            //Deselect other sorting buttons
+
+            // Deselect other sorting buttons
             priceASCOrderButton.setSelected(false);
             sortAlphaASCOrderByButton.setSelected(false);
             sortAlphaDESCOrderButton.setSelected(false);
@@ -666,14 +674,13 @@ public class inventory extends javax.swing.JFrame {
         sortAlphaASCOrderByButton.setBackground(Color.white);
         sortAlphaDESCOrderButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_priceDESCOrderButtonActionPerformed
 
-    //Sorts the Jtable by alphabetical order
     private void sortAlphaASCOrderByButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaASCOrderByButtonActionPerformed
         if (sortAlphaASCOrderByButton.isSelected()) {
-            
+
             // Deselect other sorting buttons
             priceASCOrderButton.setSelected(false);
             priceDESCOrderButton.setSelected(false);
@@ -694,14 +701,13 @@ public class inventory extends javax.swing.JFrame {
         priceDESCOrderButton.setBackground(Color.white);
         sortAlphaDESCOrderButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_sortAlphaASCOrderByButtonActionPerformed
 
-    //Sorts the opoosite way of alphabetical 
     private void sortAlphaDESCOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortAlphaDESCOrderButtonActionPerformed
         if (sortAlphaDESCOrderButton.isSelected()) {
-            
+
             // Deselect other sorting buttons
             priceASCOrderButton.setSelected(false);
             priceDESCOrderButton.setSelected(false);
@@ -722,120 +728,162 @@ public class inventory extends javax.swing.JFrame {
         priceDESCOrderButton.setBackground(Color.white);
         sortAlphaASCOrderByButton.setBackground(Color.white);
 
-        //Re-populates table
+        //Repopulates table
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
     }//GEN-LAST:event_sortAlphaDESCOrderButtonActionPerformed
 
-    //This button adds item's to the inventory
-    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-
-        //Check if a row is selected
+    private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
+        
+        //Get;s the selected row from the table
         int selectedRow = inventoryTable.getSelectedRow();
+        
+        //If no part is selected display an error message
         if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a part to add.");
+            return;
+        }
+
+        //get the part id in the selected row
+        int partID = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
+        
+        //Finds the part object using the inventory manager
+        Part inventoryPart = manager.findPartByID(partID);
+
+        // If the manager reports null, then there is an error and the part does not exist
+        if (inventoryPart == null) {
+            JOptionPane.showMessageDialog(this, "Selected part not found.");
+            return;
+        }
+        
+        // There is no stock of the current object
+        if (inventoryPart.getQuantity() <= 0) {
+            JOptionPane.showMessageDialog(this, "Selected part is out of stock.");
+            return;
+        }
+
+        //Reduces the quantity of the part in the inventory by 1 to reflect it beign added to the cart
+        inventoryPart.updateQuantity(-1);
+        //Adds the part to the cart
+        addToCart(inventoryPart);
+        
+        //Repopulates both tables to reflect the updated cases for each of the inventorys
+        populateCartTable();
+        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_addPartButtonActionPerformed
+
+    private void removePartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removePartButtonActionPerformed
+
+        //Get's the current;y se;ected row of the table
+        int selectedRow = cartTable.getSelectedRow();
+        
+        // If a row is not selected, prompt the user with an error
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a part to remove.");
+            return;
+        }
+        
+        //Get the partID from the currently selected line of the table.
+        int partID = Integer.parseInt(cartTable.getValueAt(selectedRow, 0).toString());
+        
+        //Creates cartPart object
+        Part cartPart = null;
+        
+        //A for each loop which goes through each item and does the following
+        for (Part part : cartItems) {
             
-            // No row selected, show an errors message
-            JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-            return;
-        }
-
-        //Get the part ID fromt he selected row
-        int partId = (int) inventoryTable.getValueAt(selectedRow, 0);
-
-        //Updates the number of parts in the table
-        manager.updatePartQty(partId, 1);
-
-        // Refresh the table
-        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
-
-        JOptionPane.showMessageDialog(this, "Quantity updated successfully.");
-    }//GEN-LAST:event_AddButtonActionPerformed
-
-    private void removeOneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeOneButtonActionPerformed
-
-        // Check if a row is selected
-        int selectedRow = inventoryTable.getSelectedRow();
-        if (selectedRow == -1) {
-            // No row selected, show a message
-            JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-            return;
-        }
-
-        //eGet's the part ID fromt he currently selected part
-        int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
-
-        //Defines the success of the operation
-        boolean success = manager.updatePartQty(partId, -1);
-
-        if (success) {
-            // Refresh the table
-            populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
-
-            JOptionPane.showMessageDialog(this, "Quantity decreased by 1.");
-        } else {
-            //Report error on quantity
-            JOptionPane.showMessageDialog(this, "Cannot decrease quantity below zero.");
-        }
-    }//GEN-LAST:event_removeOneButtonActionPerformed
-
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-
-// Check if a row is selected
-        int selectedRow = inventoryTable.getSelectedRow();
-        if (selectedRow == -1) {
-            //No row selected, show a message
-            JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-            return;
-        }
-
-        //Get's the Part ID of the currently selected part.
-        int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
-
-        //Asks for the users confrimation
-        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this part?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
-
-        if (confirm == JOptionPane.YES_OPTION) {
-            boolean success = manager.deletePart(partId);
-
-            if (success) {
-                //Refresh the table
-                populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
-
-                //Show success message
-                JOptionPane.showMessageDialog(this, "Part deleted successfully.");
-            } else {
-                //Show eerro message
-                JOptionPane.showMessageDialog(this, "Failed to delete part.");
+            //Ensures that the part Id is equal to that of the part we are looking for
+            if (part.getPartID() == partID) {
+                // Adds this part to the cart
+                cartPart = part;
+                break;
             }
-        } 
-    }//GEN-LAST:event_deleteButtonActionPerformed
+        }
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-    // Check if a row is selected
-    int selectedRow = inventoryTable.getSelectedRow();
-    if (selectedRow == -1) {
-        // No row selected, show a message
-        JOptionPane.showMessageDialog(this, "Please select a part from the table.");
-        return;
-    }
-
-    //Get the part ID of the selected part
-    int partId = Integer.parseInt(inventoryTable.getValueAt(selectedRow, 0).toString());
-
-    //Find the selected part
-    Part selectedPart = manager.findPartByID(partId);
-    if (selectedPart != null) {
-        // Create an instance of editPanel and pass the selected part
-        editPanel editPanelInstance = new editPanel(selectedPart);
-        editPanelInstance.setVisible(true);
-
-
-        // Repopulates the table with the currently applied filters 
+        //This is the error case, if a part is not found an error message is displaued
+        if (cartPart == null) {
+            JOptionPane.showMessageDialog(this, "Selected part not found in cart.");
+            return;
+        }
+        
+        //Set's the quantity of the current part in the cart to negative one to ensure that the cart items table reflect it. 
+        cartPart.setQuantity(cartPart.getQuantity() - 1);
+        
+        //If the part is equal to zero, or goes below zero, it removes the part from the cart Jtable
+        if (cartPart.getQuantity() <= 0) {
+            cartItems.remove(cartPart);
+        }
+        
+        //Creates an inventory part object which then finds the part based off the cartPart ID
+        Part inventoryPart = manager.findPartByID(partID);
+        
+        //If it found that this part is infact real the quanitites are updated
+        if (inventoryPart != null) {
+            inventoryPart.updateQuantity(1);
+        }
+        
+        //Re populates the table to showcase he removed part
+        populateCartTable();
         populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
-    } else {
-        JOptionPane.showMessageDialog(this, "Part not found.");
-    }   
-    
-    }//GEN-LAST:event_editButtonActionPerformed
+
+    }//GEN-LAST:event_removePartButtonActionPerformed
+
+    private void clearOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearOrderButtonActionPerformed
+        // Initiates a for each loop which enacts on each item.
+        for (Part cartPart : cartItems) {
+            //Finds the part in the inventory to which the cart part will update
+            Part inventoryPart = manager.findPartByID(cartPart.getPartID());
+            
+            //If it is found in the invetory then the inventory part is updated by the quanityt of the parts that were in the cart
+            if (inventoryPart != null) {
+                
+                //Get's the quantiy of items that were in the cart and updates the inventory to add back that same amount of parts
+                inventoryPart.updateQuantity(cartPart.getQuantity());
+            }
+        }
+
+        //Calls upon the clear method
+        cartItems.clear();
+        
+        //Repopulates the table to showcases the changes.
+        populateCartTable();
+        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+    }//GEN-LAST:event_clearOrderButtonActionPerformed
+
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
+        //checks if the users cart is empty, if so display a prompt
+        if (cartItems.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Your cart is empty.");
+            return;
+        }
+
+        //Get's the CLIENTID registered to this sale
+        int clientID = Integer.parseInt(JOptionPane.showInputDialog("Please specify client ID")); // FOR TESTNG PURPOSES THIS REMIAINS 1, WE NEED TO INPUT THE ACTUAL CLIENT ID IN HERE
+        //The total for the sale
+        int totalAmount = 0;
+        
+        //Does a for each loop to calcualte the total of each item
+        for (Part part : cartItems) {
+            totalAmount += part.getPrice() * part.getQuantity();
+        }
+        
+        // Created a new slaemanager obkect to manage the sale
+        saleManager saleMgr = new saleManager();
+        //Creates the sale using the inputted details
+        saleMgr.createSale(new ArrayList<>(cartItems), totalAmount, clientID);
+        
+        
+        
+        Client c = cManager.findClientById(clientID);
+        c.updateTotalSpent(totalAmount);
+        
+        //Clears the users cart
+        cartItems.clear();
+
+        //Repupulates the table to relfect the changes
+        populateCartTable();
+        populateTable(currentCategoryFilter, currentQuantityFilter, currentSortOrder);
+        JOptionPane.showMessageDialog(this, "Checkout complete. Sale recorded.");
+    }//GEN-LAST:event_checkoutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -854,49 +902,54 @@ public class inventory extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleCreationPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleCreationPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleCreationPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(inventory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SaleCreationPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new inventory().setVisible(true);
+                new SaleCreationPanel().setVisible(true);
             }
         });
     }
-
+    
+    //Method used to populate the inventory table
     private void populateTable(String categoryFilter, String quantityFilter, String sortOrder) {
         DefaultTableModel tableModel = new DefaultTableModel();
 
         try {
 
-            //Connects to the database
+            // Connects to the database
             DB.connect();
 
-            //Query
+            //The query used
             String query = "SELECT parts.part_id, parts.part_name, parts.price, parts.category, "
                     + "COALESCE(inventory.quantity, 0) AS quantity "
                     + "FROM parts "
                     + "LEFT JOIN inventory ON parts.part_id = inventory.part_id";
 
-            //Builds the WHERE clause based on filters
+            //Creates an array list which is then used to build the filter conditions
             List<String> conditions = new ArrayList<>();
-
-            //If there is a defined filter, this clause adds the spcae for that filter to be applied to the query which is then executed. This is catogory
+            
+            //Checks if the filter is on, if it is build the new SQL query
             if (categoryFilter != null && !categoryFilter.isEmpty()) {
-                //Adds the filter to SQL
                 conditions.add("parts.category = '" + categoryFilter + "'");
             }
             
-            //Creates a swithc case for the filters based on the filters for quantity.
+            //Checks if the catogory filter buttons are clicked, if so build new sql statment
             if (quantityFilter != null && !quantityFilter.isEmpty()) {
+                
+                // Switcch case based off the currently selected filters, builds the new query
                 switch (quantityFilter) {
                     case "LOW":
                         conditions.add("quantity > 0 AND quantity <= 10");
@@ -911,7 +964,7 @@ public class inventory extends javax.swing.JFrame {
                 }
             }
             
-            //Checks if the conditions array list is empty, if not add in the clauses.
+            //Checks to see if there are condition buttons clicked, if so join them to this current query in order to build a compound query
             if (!conditions.isEmpty()) {
                 query += " WHERE " + String.join(" AND ", conditions);
             }
@@ -934,10 +987,10 @@ public class inventory extends javax.swing.JFrame {
                 }
             }
 
-            //Executres the query
+            //Executes the query
             ResultSet resultSet = DB.query(query);
 
-            //Get metadata to add column names
+            // Get metadata to add column names
             ResultSetMetaData metaData = resultSet.getMetaData();
             int columnCount = metaData.getColumnCount();
 
@@ -946,7 +999,7 @@ public class inventory extends javax.swing.JFrame {
                 tableModel.addColumn(metaData.getColumnName(i));
             }
 
-            //Add rows to the table model
+            // Add rows to the table model
             while (resultSet.next()) {
                 Object[] rowData = new Object[columnCount];
                 for (int i = 1; i <= columnCount; i++) {
@@ -958,7 +1011,7 @@ public class inventory extends javax.swing.JFrame {
             // Set the model to your JTable
             inventoryTable.setModel(tableModel);
 
-            //Shut it down
+            // Close the resultSet
             resultSet.close();
 
         } catch (ClassNotFoundException | SQLException pleaseDontGiveMeErrors) {
@@ -980,40 +1033,100 @@ public class inventory extends javax.swing.JFrame {
             return "";
         }
     }
+    
+    //A method to add items to the cart which then helps build the JTABLE
+    private void addToCart(Part partToAdd) {
+        //A boolean to store if a part is in a cart or not.
+        boolean partExistsInCart = false;
+        
+        //A for each loop that checks if the item is already in the cart if so add the part to the corect and as such increases it's quanity in the cart
+        for (Part cartPart : cartItems) {
+            if (cartPart.getPartID() == partToAdd.getPartID()) {
+                //Increases the quantity of the items in the cart
+                cartPart.setQuantity(cartPart.getQuantity() + 1);
+                //Set's the boolean to true
+                partExistsInCart = true;
+                break;
+            }
+        }
+        
+        //If the item is not in the cart, make a new entry into the table
+        if (!partExistsInCart) {
+            
+            //Adds the correct attributes to the JTable to ensure it works correctly.
+            Part cartPart = new Part(
+                    partToAdd.getPartID(),
+                    partToAdd.getName(),
+                    partToAdd.getPrice(),
+                    partToAdd.getCatogory(),
+                    1
+            );
+            // aDds the itme to the cart part array list.
+            cartItems.add(cartPart);
+        }
+    }
+    
+    // The method used to create a visual representation in the form of a jtable of the users parts
+    private void populateCartTable() {
+        //Set's the tables default model
+        DefaultTableModel tableModel = new DefaultTableModel();
+        
+        //Adds the required collumms for the part data
+        tableModel.addColumn("Part ID");
+        tableModel.addColumn("Part Name");
+        tableModel.addColumn("Price");
+        tableModel.addColumn("Category");
+        tableModel.addColumn("Quantity");
+
+        //Does a for each loop to ensure each part in the cart items array list is added to the table
+        for (Part part : cartItems) {
+            Object[] rowData = new Object[]{
+                part.getPartID(),
+                part.getName(),
+                part.getPrice(),
+                part.getCatogory(),
+                part.getQuantity()
+            };
+            
+            //Adds a row for the next part to be entered into
+            tableModel.addRow(rowData);
+        }
+        
+        //sets the table model
+        cartTable.setModel(tableModel);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddButton;
-    private javax.swing.JLabel advancedSearchLabel;
-    private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
+    private javax.swing.JButton addPartButton;
+    private javax.swing.JTable cartTable;
+    private javax.swing.JButton checkoutButton;
+    private javax.swing.JButton clearOrderButton;
     private javax.swing.JToggleButton engineTagButton;
     private javax.swing.JToggleButton fuselageTagButton;
     private javax.swing.JToggleButton highQuantityFilterButton;
     private javax.swing.JPanel inventoryFiltersPanel;
     private javax.swing.JLabel inventoryMainHeader;
     private javax.swing.JTable inventoryTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToggleButton lowQuantityFilterButton;
     private javax.swing.JLabel orderByLabel;
     private javax.swing.JToggleButton paintsTagButton;
-    private javax.swing.JTextField partIDEntryTextField;
-    private javax.swing.JLabel partIDLabel;
-    private javax.swing.JTextField partNameEntryField;
-    private javax.swing.JLabel partNameLabel;
     private javax.swing.JLabel partTagsLabel;
     private javax.swing.JToggleButton priceASCOrderButton;
     private javax.swing.JToggleButton priceDESCOrderButton;
-    private javax.swing.JButton removeOneButton;
+    private javax.swing.JButton removePartButton;
     private javax.swing.JToggleButton sortAlphaASCOrderByButton;
     private javax.swing.JToggleButton sortAlphaDESCOrderButton;
     private javax.swing.JToggleButton toReplenishFilterButton;
     private javax.swing.JToggleButton wingsTagButton;
+    private javax.swing.JLabel yourCartHeader;
     // End of variables declaration//GEN-END:variables
 }

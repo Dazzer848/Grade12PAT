@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author dazzl
  */
-public class saleEditor extends javax.swing.JFrame {
+public class SaleDetailsPanel extends javax.swing.JFrame {
 
     // The global variables that are required for fulling in the data on this screen.
     private Part part;
@@ -34,7 +34,7 @@ public class saleEditor extends javax.swing.JFrame {
      * Creates new form editPanel
      */
     //Building site
-    public saleEditor(int inSID) {
+    public SaleDetailsPanel(int inSID) {
         initComponents();
         
         // This method populates the UI components with the data from the class

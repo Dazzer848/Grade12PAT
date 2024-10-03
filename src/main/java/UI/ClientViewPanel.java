@@ -11,6 +11,7 @@ import Backend.clientManager;
 import Backend.inventoryManager;
 import Backend.saleManager;
 import DBMS.DB;
+import UI.SaleDetailsPanel;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author dazzl
  */
-public class clientEditor extends javax.swing.JFrame {
+public class ClientViewPanel extends javax.swing.JFrame {
 
     // The global variables that are required for fulling in the data on this screen.
     private Part part;
@@ -37,7 +38,7 @@ public class clientEditor extends javax.swing.JFrame {
      * Creates new form editPanel
      */
     //Building site
-    public clientEditor() {
+    public ClientViewPanel() {
         initComponents();
         this.cManager = new clientManager();
         this.inventoryManager = new inventoryManager();
@@ -98,7 +99,7 @@ public class clientEditor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         editItemHeader.setFont(new java.awt.Font("Candara Light", 0, 48)); // NOI18N
-        editItemHeader.setText("EDIT CLIENT");
+        editItemHeader.setText("VIEW CLIENT");
 
         enterNameTextField.setText("Enter your name...");
         enterNameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +239,7 @@ public class clientEditor extends javax.swing.JFrame {
         
         int inSID = Integer.parseInt(clientPurchasesJTable.getValueAt(selectedRow, 0).toString());
         
-        saleEditor salePanelInstance = new saleEditor(inSID);
+        SaleDetailsPanel salePanelInstance = new SaleDetailsPanel(inSID);
         salePanelInstance.setVisible(true);
     }//GEN-LAST:event_saleContentsButtonActionPerformed
 
