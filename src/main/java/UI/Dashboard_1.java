@@ -161,7 +161,7 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     //Makes the helpScreen visble
     private void helpScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpScreenButtonActionPerformed
-        new helpScreen().setVisible(true);
+        new HelpPanel().setVisible(true);
     }//GEN-LAST:event_helpScreenButtonActionPerformed
 
     //Makes the part PartCreationPanel visible
