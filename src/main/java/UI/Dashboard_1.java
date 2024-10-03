@@ -19,10 +19,12 @@ public class Dashboard_1 extends javax.swing.JFrame {
     /**
      * Creates new form dashboard
      */
-    //Construction?
-    //THERE IS FUNNY STUFF HERE IN THIS CODE!
     public Dashboard_1() {
+        
+        //Initializes the UI
         initComponents();
+        
+        //Set's it to the centre of the screen
         setLocationRelativeTo(null);
         
     }
@@ -40,8 +42,8 @@ public class Dashboard_1 extends javax.swing.JFrame {
         saleCreatorButton = new javax.swing.JButton();
         clientEditorButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        helpScreenButton = new javax.swing.JButton();
+        partCreatorButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,19 +74,19 @@ public class Dashboard_1 extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Candara Light", 1, 48)); // NOI18N
         jLabel1.setText("INVENTORY MANAGEMENT");
 
-        jButton1.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jButton1.setText("HELP");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        helpScreenButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        helpScreenButton.setText("HELP");
+        helpScreenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                helpScreenButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jButton2.setText("PART CREATOR");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        partCreatorButton.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        partCreatorButton.setText("PART CREATOR");
+        partCreatorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                partCreatorButtonActionPerformed(evt);
             }
         });
 
@@ -93,20 +95,19 @@ public class Dashboard_1 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(149, Short.MAX_VALUE)
+                .addContainerGap(158, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(120, 120, 120))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(inventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(saleCreatorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
-                                .addComponent(clientEditorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(260, 260, 260))))
+                            .addComponent(partCreatorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                            .addComponent(inventoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saleCreatorButton, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                            .addComponent(clientEditorButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(helpScreenButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(260, 260, 260))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(111, 111, 111))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,9 +121,9 @@ public class Dashboard_1 extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(clientEditorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(partCreatorButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(helpScreenButton, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -132,28 +133,30 @@ public class Dashboard_1 extends javax.swing.JFrame {
     //Makes the inventory screen visible
     private void inventoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inventoryButtonActionPerformed
         new InventoryPanel().setVisible(true);
-
-       
     }//GEN-LAST:event_inventoryButtonActionPerformed
-
+    
+    //Makes the saleCreationPanel visible
     private void saleCreatorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleCreatorButtonActionPerformed
         new SaleCreationPanel().setVisible(true);
 
     }//GEN-LAST:event_saleCreatorButtonActionPerformed
-
+    
+    //Makes the clientEditorPanel visble
     private void clientEditorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientEditorButtonActionPerformed
-        ClientViewPanel clientPanelInstance = new ClientViewPanel();
+        ClientEditPanel clientPanelInstance = new ClientEditPanel();
         clientPanelInstance.setVisible(true);
     }//GEN-LAST:event_clientEditorButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    //Makes the helpScreen visble
+    private void helpScreenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpScreenButtonActionPerformed
         new helpScreen().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_helpScreenButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    //Makes the part PartCreationPanel visible
+    private void partCreatorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_partCreatorButtonActionPerformed
         PartCreationPanel partCreationPanel = new PartCreationPanel();
         partCreationPanel.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_partCreatorButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,10 +202,10 @@ public class Dashboard_1 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clientEditorButton;
+    private javax.swing.JButton helpScreenButton;
     private javax.swing.JButton inventoryButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton partCreatorButton;
     private javax.swing.JButton saleCreatorButton;
     // End of variables declaration//GEN-END:variables
 }

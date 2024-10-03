@@ -734,7 +734,7 @@ public class SaleCreationPanel extends javax.swing.JFrame {
 
     private void addPartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPartButtonActionPerformed
         
-        //Get;s the selected row from the table
+        //Gets the selected row from the table
         int selectedRow = inventoryTable.getSelectedRow();
         
         //If no part is selected display an error message
@@ -791,7 +791,7 @@ public class SaleCreationPanel extends javax.swing.JFrame {
         //A for each loop which goes through each item and does the following
         for (Part part : cartItems) {
             
-            //Ensures that the part Id is equal to that of the part we are looking for
+            //Finds the part which is meant to be added to the cart
             if (part.getPartID() == partID) {
                 // Adds this part to the cart
                 cartPart = part;

@@ -61,13 +61,19 @@ public class PartCreationPanel extends javax.swing.JFrame {
         priceLabel = new javax.swing.JLabel();
         itemPriceSpinner = new javax.swing.JSpinner();
         confirmButton = new javax.swing.JButton();
+        partNameJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         editItemHeader.setFont(new java.awt.Font("Candara Light", 0, 48)); // NOI18N
-        editItemHeader.setText("EDIT ITEM");
+        editItemHeader.setText("CREATE ITEM");
 
-        enterPartNameTextField.setText("Enter your name...");
+        enterPartNameTextField.setText("Please enter your part's name");
+        enterPartNameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                enterPartNameTextFieldFocusGained(evt);
+            }
+        });
         enterPartNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 enterPartNameTextFieldActionPerformed(evt);
@@ -90,6 +96,9 @@ public class PartCreationPanel extends javax.swing.JFrame {
             }
         });
 
+        partNameJLabel.setFont(new java.awt.Font("Corbel", 1, 14)); // NOI18N
+        partNameJLabel.setText("PART NAME: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,14 +106,16 @@ public class PartCreationPanel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(editItemHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(117, 117, 117)
+                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(enterPartNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(catagorySelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(partNameJLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(enterPartNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(catagorySelectionComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(priceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,22 +123,24 @@ public class PartCreationPanel extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(quantitiyLable)
-                                    .addComponent(itemQuantitySpinner)))))
+                                    .addComponent(itemQuantitySpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(84, Short.MAX_VALUE))
+                        .addGap(102, 102, 102)
+                        .addComponent(editItemHeader, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(31, 31, 31)
                 .addComponent(editItemHeader)
-                .addGap(32, 32, 32)
-                .addComponent(enterPartNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(catagorySelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enterPartNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(partNameJLabel))
                 .addGap(37, 37, 37)
+                .addComponent(catagorySelectionComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(priceLabel)
                     .addComponent(quantitiyLable))
@@ -148,40 +161,44 @@ public class PartCreationPanel extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_enterPartNameTextFieldActionPerformed
 
+    private void enterPartNameTextFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_enterPartNameTextFieldFocusGained
+        enterPartNameTextField.setText("");
+    }//GEN-LAST:event_enterPartNameTextFieldFocusGained
+
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         try {
             //Validate and approve the data
-          
+
             //Gets the new name of the part as entered
             String partName = enterPartNameTextField.getText();
-            
+
             //Get's the catogory that the user selected
             String category = catagorySelectionComboBox.getSelectedItem().toString();
-            
+
             //Get's the price that the user entered
             int price = (int) itemPriceSpinner.getValue();
-            
+
             // Get's the quantity entered
             int quantity = (int) itemQuantitySpinner.getValue();
-            
+
             //Validation
-            if (partName.isEmpty()) {
+            if (partName.isEmpty() || enterPartNameTextField.getText().equals("cre")) {
                 JOptionPane.showMessageDialog(this, "Part name cannot be empty.");
                 return;
             }
-            
+
             //Price Validation
             if (price <= 0) {
                 JOptionPane.showMessageDialog(this, "Price must be greater than zero.");
                 return;
             }
-            
+
             // Quantity Validation
             if (quantity <= 0) {
                 JOptionPane.showMessageDialog(this, "Quantity must be greater than zero.");
                 return;
             }
-            
+
             ResultSet highestPartIDTable = DB.query("SELECT part_ID FROM sys.inventory ORDER BY part_ID DESC LIMIT 1 ;");
             highestPartIDTable.next();
             int highestPartID = highestPartIDTable.getInt(1) + 1;
@@ -189,14 +206,14 @@ public class PartCreationPanel extends javax.swing.JFrame {
             Part newPart = new Part(highestPartID, partName, price, category, quantity);
             // Update the database
             boolean success = manager.updatePartDetails(newPart);
-            
+
             //Ensures the success of the operation
             if (success) {
                 JOptionPane.showMessageDialog(this, "Part Created successfully.");
                 this.dispose();
-                
+
             }
-            
+
             //Reports an error
             else {
                 JOptionPane.showMessageDialog(this, "Failed to Create part.");
@@ -204,7 +221,7 @@ public class PartCreationPanel extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PartCreationPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_confirmButtonActionPerformed
     
 
@@ -216,6 +233,7 @@ public class PartCreationPanel extends javax.swing.JFrame {
     private javax.swing.JTextField enterPartNameTextField;
     private javax.swing.JSpinner itemPriceSpinner;
     private javax.swing.JSpinner itemQuantitySpinner;
+    private javax.swing.JLabel partNameJLabel;
     private javax.swing.JLabel priceLabel;
     private javax.swing.JLabel quantitiyLable;
     // End of variables declaration//GEN-END:variables

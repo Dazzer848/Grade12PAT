@@ -44,12 +44,14 @@ public class clientManager {
                 boolean loyalty = clients.getBoolean(3);
                 int totalSpent = clients.getInt(4);
                 
+                // Checks if the client is elligable for loyalty or has loyalty alrady
                 if(totalSpent > 50000 || loyalty == true){
                     DB.update("UPDATE sys.clients SET Loyalty = 1 WHERE (ClientID = " + clientID + ");");
                 }
                
-                clients.next();
                 
+                clients.next();
+                //Makes a new Client Object and adds it to an array
                 Client c = new Client(clientName, clientID, loyalty, totalSpent);
                 clientsArr[i] = c;
                 size++;
@@ -63,21 +65,36 @@ public class clientManager {
 
     }
     
+    //A method used to locate a client object by it's clientID
     public Client findClientById(int inCID){
+        
+        //Searches throught he array of clients
         for(int i = 0; i < size;i++){
+            
+            //Get's the client ID
             int clientsID = clientsArr[i].getClientID();
+            
+            //Of the client ID mathes that of the ClientID we are looking for
             if(clientsArr[i].getClientID() == inCID){
+                //Return that client object
                 return clientsArr[i];
             }
         }
+        //If nothing is found return null
         return null;
     }
     
+   //updates the clients loyalty status
    public void setLoyalty(boolean inLoyalty, int inCID) {
         try {
+            
+            //Finds the clinet in question
             Client c = findClientById(inCID);
+            
+            //Updates it's loyalty to the status
             c.setLoyalty(inLoyalty);
             
+            //Updates the database to reflect this change
             DB.update("UPDATE sys.clients SET Loyalty = " + inLoyalty + " WHERE (ClientID = " + inCID + ");");
         } catch (SQLException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);

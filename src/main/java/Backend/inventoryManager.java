@@ -86,9 +86,8 @@ public class inventoryManager {
     }
     
     //If the part does not exist supply an error
-    
     else {
-        System.err.println("Part with ID " + inPID + " not found in inventoryManager.");
+        System.out.println("Part with ID " + inPID + " not found in inventoryManager.");
         return false;
     }
     

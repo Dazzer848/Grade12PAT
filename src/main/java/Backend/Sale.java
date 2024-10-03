@@ -47,7 +47,10 @@ public class Sale {
     //A string represtation of the sale
     public String toString(){
         String output = "============== ITEMS BOUGHT ==================\n";
+        
+        //Loops through all the sales in the array
         for(int i = 0; i < sales.size(); i++){
+            //Logical item number simply reffers to item 1 at index 0
             int logicalItemNumber = i + 1;
             output += "================== ITEM " + logicalItemNumber + " =====================";
             Part p = sales.get(i);
@@ -60,10 +63,12 @@ public class Sale {
         
     }
 
+    //Returs the ClientID that the sale belogns too 
     public int getClientId() {
         return clientId;
     }
 
+    //Returns the Sale ID
     public int getSaleID() {
         return saleID;
     }

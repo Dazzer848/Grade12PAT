@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author dazzl
  */
-public class ClientViewPanel extends javax.swing.JFrame {
+public class ClientEditPanel extends javax.swing.JFrame {
 
     // The global variables that are required for fulling in the data on this screen.
     private Part part;
@@ -37,15 +37,18 @@ public class ClientViewPanel extends javax.swing.JFrame {
     /**
      * Creates new form editPanel
      */
-    //Building site
-    public ClientViewPanel() {
+    public ClientEditPanel() {
+        //Initializes the UI components
         initComponents();
+        
+        //Creates the required managers for the data
         this.cManager = new clientManager();
         this.inventoryManager = new inventoryManager();
         this.saleManager = new saleManager();
         
         this.clientID = Integer.parseInt(JOptionPane.showInputDialog("Please enter your client number"));
-        // This method populates the UI components with the data from the class
+        
+        //This method populates the UI components with the data from the class
         populateFields(clientID);
         populateSalesTable(clientID);
         
@@ -225,13 +228,12 @@ public class ClientViewPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // Enetering the name of the part
     private void enterNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enterNameTextFieldActionPerformed
 
     }//GEN-LAST:event_enterNameTextFieldActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-
+        dispose();
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void saleContentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleContentsButtonActionPerformed
